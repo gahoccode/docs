@@ -1,11 +1,12 @@
 # Documentation Repository
 
-This repository contains documentation files related to financial analysis and stock market tools.
+This repository contains documentation files related to financial analysis and stock market tools for portfolio optimization, Vietnamese stock market analysis, and general financial analysis.
 
-## Files
+## Documentation Files
 
 ### Vietnamese Stock Market Tools
 - `thinh-vu-vnstock.md` - Documentation for vnstock library by Thinh Vu
+- `vnstock-ezchart.md` - Documentation for vnstock's ezchart visualization module
 - `vnquant.md` - Documentation for VNQuant library
 
 ### Portfolio Optimization Tools
@@ -17,4 +18,4 @@ This repository contains documentation files related to financial analysis and s
 - `finquant.md` - Documentation for FinQuant financial analysis library
 - `mplfinance.md` - Documentation for mplfinance library (financial plotting)
 
-Last Updated: May 9, 2025
+Last Updated: May 14, 2025
