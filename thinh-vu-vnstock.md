@@ -13,7 +13,92 @@ from vnstock import Vnstock
 
 # Initialize with a stock symbol and data source
 stock = Vnstock().stock(symbol='VCI', source='VCI')
-
+Data columns (total 84 columns):
+ #   Column                         Non-Null Count  Dtype  
+---  ------                         --------------  -----  
+ 0   ticker                         1613 non-null   object 
+ 1   exchange                       1613 non-null   object 
+ 2   industry                       1613 non-null   object 
+ 4   market_cap                     1268 non-null   float64
+ 5   roe                            1268 non-null   float64
+ 6   stock_rating                   855 non-null    float64
+ 7   business_operation             1553 non-null   float64
+ 8   business_model                 797 non-null    float64
+ 9   financial_health               1553 non-null   float64
+ 10  alpha                          1553 non-null   float64
+ 11  beta                           1553 non-null   float64
+ 12  uptrend                        26 non-null     object 
+ 13  active_buy_pct                 897 non-null    float64
+ 14  strong_buy_pct                 1132 non-null   float64
+ 15  high_vol_match                 950 non-null    float64
+ 16  forecast_vol_ratio             948 non-null    float64
+ 17  pe                             1235 non-null   float64
+ 18  pb                             1235 non-null   float64
+ 19  ev_ebitda                      1192 non-null   float64
+ 20  dividend_yield                 1268 non-null   float64
+ 21  price_vs_sma5                  301 non-null    object 
+ 22  price_vs_sma20                 960 non-null    object 
+ 23  revenue_growth_1y              1219 non-null   float64
+ 24  revenue_growth_5y              1171 non-null   float64
+ 25  eps_growth_1y                  1179 non-null   float64
+ 26  eps_growth_5y                  1050 non-null   float64
+ 27  gross_margin                   1118 non-null   float64
+ 28  net_margin                     986 non-null    float64
+ 29  doe                            1239 non-null   float64
+ 30  avg_trading_value_5d           1613 non-null   float64
+ 31  avg_trading_value_10d          1613 non-null   float64
+ 32  avg_trading_value_20d          1613 non-null   float64
+ 33  relative_strength_3d           910 non-null    float64
+ 34  rel_strength_1m                906 non-null    float64
+ 35  rel_strength_3m                901 non-null    float64
+ 36  rel_strength_1y                884 non-null    float64
+ 37  total_trading_value            963 non-null    float64
+ 38  foreign_transaction            357 non-null    object 
+ 39  price_near_realtime            960 non-null    float64
+ 40  rsi14                          960 non-null    float64
+ 41  foreign_vol_pct                1566 non-null   float64
+ 42  tc_rs                          910 non-null    float64
+ 43  tcbs_recommend                 98 non-null     object 
+ 44  tcbs_buy_sell_signal           960 non-null    object 
+ 45  foreign_buysell_20s            1564 non-null   float64
+ 46  num_increase_continuous_day    1143 non-null   float64
+ 47  num_decrease_continuous_day    1204 non-null   float64
+ 48  eps                            1112 non-null   float64
+ 49  macd_histogram                 960 non-null    object 
+ 50  vol_vs_sma5                    947 non-null    float64
+ 51  vol_vs_sma10                   956 non-null    float64
+ 52  vol_vs_sma20                   960 non-null    float64
+ 53  vol_vs_sma50                   960 non-null    float64
+ 54  price_vs_sma10                 215 non-null    object 
+ 55  price_vs_sma50                 960 non-null    object 
+ 56  price_break_out52_week         12 non-null     object 
+ 57  price_wash_out52_week          4 non-null      object 
+ 58  sar_vs_macd_hist               46 non-null     object 
+ 59  bolling_band_signal            143 non-null    object 
+ 60  dmi_signal                     17 non-null     object 
+ 61  rsi14_status                   960 non-null    object 
+ 62  price_growth_1w                959 non-null    float64
+ 63  price_growth_1m                960 non-null    float64
+ 64  breakout                       17 non-null     object 
+ 65  prev_1d_growth_pct             960 non-null    float64
+ 66  prev_1m_growth_pct             960 non-null    float64
+ 67  prev_1y_growth_pct             960 non-null    float64
+ 68  prev_5y_growth_pct             881 non-null    float64
+ 69  has_financial_report           1613 non-null   object 
+ 70  free_transfer_rate             1612 non-null   float64
+ 71  net_cash_per_market_cap        1117 non-null   float64
+ 72  net_cash_per_total_assets      1131 non-null   float64
+ 73  profit_last_4q                 1160 non-null   float64
+ 74  last_quarter_revenue_growth    1075 non-null   float64
+ 75  second_quarter_revenue_growth  1079 non-null   float64
+ 76  last_quarter_profit_growth     853 non-null    float64
+ 77  second_quarter_profit_growth   877 non-null    float64
+ 78  pct_1y_from_peak               960 non-null    float64
+ 79  pct_away_from_hist_peak        960 non-null    float64
+ 80  pct_1y_from_bottom             960 non-null    float64
+ 81  pct_off_hist_bottom            953 non-null    float64
+ 82  price_vs_sma100                960 non-null    object 
+ 83  heating_up                     10 non-null     object 
 # Now access various components through stock objects
 # For example: stock.finance, stock.company, stock.quote, etc.
 ```
@@ -852,5 +937,142 @@ sentiment_count = recent_news['sentiment_category'].value_counts()
 print("News Sentiment Analysis:")
 print(sentiment_count)
 ```
+Ratio.columns.to_list()
+[('Meta', 'CP'),
+ ('Meta', 'Năm'),
+ ('Meta', 'Kỳ'),
+ ('Chỉ tiêu cơ cấu nguồn vốn', '(Vay NH+DH)/VCSH'),
+ ('Chỉ tiêu cơ cấu nguồn vốn', 'Nợ/VCSH'),
+ ('Chỉ tiêu cơ cấu nguồn vốn', 'TSCĐ / Vốn CSH'),
+ ('Chỉ tiêu cơ cấu nguồn vốn', 'Vốn CSH/Vốn điều lệ'),
+ ('Chỉ tiêu hiệu quả hoạt động', 'Vòng quay tài sản'),
+ ('Chỉ tiêu hiệu quả hoạt động', 'Vòng quay TSCĐ'),
+ ('Chỉ tiêu hiệu quả hoạt động', 'Số ngày thu tiền bình quân'),
+ ('Chỉ tiêu hiệu quả hoạt động', 'Số ngày tồn kho bình quân'),
+ ('Chỉ tiêu hiệu quả hoạt động', 'Số ngày thanh toán bình quân'),
+ ('Chỉ tiêu hiệu quả hoạt động', 'Chu kỳ tiền'),
+ ('Chỉ tiêu hiệu quả hoạt động', 'Vòng quay hàng tồn kho'),
+ ('Chỉ tiêu khả năng sinh lợi', 'Biên EBIT (%)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'Biên lợi nhuận gộp (%)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'Biên lợi nhuận ròng (%)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'ROE (%)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'ROIC (%)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'ROA (%)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'EBITDA (Tỷ đồng)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'EBIT (Tỷ đồng)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'Tỷ suất cổ tức (%)'),
+ ('Chỉ tiêu thanh khoản', 'Chỉ số thanh toán hiện thời'),
+ ('Chỉ tiêu thanh khoản', 'Chỉ số thanh toán tiền mặt'),
+ ('Chỉ tiêu thanh khoản', 'Chỉ số thanh toán nhanh'),
+ ('Chỉ tiêu thanh khoản', 'Khả năng chi trả lãi vay'),
+ ('Chỉ tiêu thanh khoản', 'Đòn bẩy tài chính'),
+ ('Chỉ tiêu định giá', 'Vốn hóa (Tỷ đồng)'),
+ ('Chỉ tiêu định giá', 'Số CP lưu hành (Triệu CP)'),
+ ('Chỉ tiêu định giá', 'P/E'),
+ ('Chỉ tiêu định giá', 'P/B'),
+ ('Chỉ tiêu định giá', 'P/S'),
+ ('Chỉ tiêu định giá', 'P/Cash Flow'),
+ ('Chỉ tiêu định giá', 'EPS (VND)'),
+ ('Chỉ tiêu định giá', 'BVPS (VND)'),
+ ('Chỉ tiêu định giá', 'EV/EBITDA')]
 
-These examples demonstrate the versatility of the vnstock library for various types of stock market analysis in the Vietnamese context, from technical and fundamental analysis to screening, competitor comparison, and event impact studies.
+CashFlow.columns.to_list()
+ ['ticker',
+ 'yearReport',
+ 'Net Profit/Loss before tax',
+ 'Depreciation and Amortisation',
+ 'Provision for credit losses',
+ 'Unrealized foreign exchange gain/loss',
+ 'Profit/Loss from investing activities',
+ 'Interest Expense',
+ 'Operating profit before changes in working capital',
+ 'Increase/Decrease in receivables',
+ 'Increase/Decrease in inventories',
+ 'Increase/Decrease in payables',
+ 'Increase/Decrease in prepaid expenses',
+ 'Interest paid',
+ 'Business Income Tax paid',
+ 'Other receipts from operating activities',
+ 'Other payments on operating activities',
+ 'Net cash inflows/outflows from operating activities',
+ 'Purchase of fixed assets',
+ 'Proceeds from disposal of fixed assets',
+ 'Loans granted, purchases of debt instruments (Bn. VND)',
+ 'Collection of loans, proceeds from sales of debts instruments (Bn. VND)',
+ 'Investment in other entities',
+ 'Proceeds from divestment in other entities',
+ 'Gain on Dividend',
+ 'Net Cash Flows from Investing Activities',
+ 'Increase in charter captial',
+ 'Payments for share repurchases',
+ 'Proceeds from borrowings',
+ 'Repayment of borrowings',
+ 'Dividends paid',
+ 'Cash flows from financial activities',
+ 'Net increase/decrease in cash and cash equivalents',
+ 'Cash and cash equivalents',
+ 'Foreign exchange differences Adjustment',
+ 'Cash and Cash Equivalents at the end of period']
+
+BalanceSheet.columns.to_list()
+ ['ticker',
+ 'yearReport',
+ 'CURRENT ASSETS (Bn. VND)',
+ 'Cash and cash equivalents (Bn. VND)',
+ 'Short-term investments (Bn. VND)',
+ 'Accounts receivable (Bn. VND)',
+ 'Net Inventories',
+ 'Other current assets',
+ 'LONG-TERM ASSETS (Bn. VND)',
+ 'Long-term loans receivables (Bn. VND)',
+ 'Fixed assets (Bn. VND)',
+ 'Investment in properties',
+ 'Long-term investments (Bn. VND)',
+ 'Other non-current assets',
+ 'TOTAL ASSETS (Bn. VND)',
+ 'LIABILITIES (Bn. VND)',
+ 'Current liabilities (Bn. VND)',
+ 'Long-term liabilities (Bn. VND)',
+ "OWNER'S EQUITY(Bn.VND)",
+ 'Capital and reserves (Bn. VND)',
+ 'Other Reserves',
+ 'Undistributed earnings (Bn. VND)',
+ 'MINORITY INTERESTS',
+ 'TOTAL RESOURCES (Bn. VND)',
+ 'Prepayments to suppliers (Bn. VND)',
+ 'Short-term loans receivables (Bn. VND)',
+ 'Inventories, Net (Bn. VND)',
+ 'Other current assets (Bn. VND)',
+ 'Investment and development funds (Bn. VND)',
+ 'Common shares (Bn. VND)',
+ 'Paid-in capital (Bn. VND)',
+ 'Long-term borrowings (Bn. VND)',
+ 'Advances from customers (Bn. VND)',
+ 'Short-term borrowings (Bn. VND)',
+ 'Good will (Bn. VND)',
+ 'Long-term prepayments (Bn. VND)',
+ 'Other long-term assets (Bn. VND)',
+ 'Other long-term receivables (Bn. VND)',
+ 'Long-term trade receivables (Bn. VND)',
+ 'Quick Ratio']
+
+ overview.columns.to_list()
+
+ ['symbol',
+ 'exchange',
+ 'industry',
+ 'company_type',
+ 'no_shareholders',
+ 'foreign_percent',
+ 'outstanding_share',
+ 'issue_share',
+ 'established_year',
+ 'no_employees',
+ 'stock_rating',
+ 'delta_in_week',
+ 'delta_in_month',
+ 'delta_in_year',
+ 'short_name',
+ 'website',
+ 'industry_id',
+ 'industry_id_v2']
