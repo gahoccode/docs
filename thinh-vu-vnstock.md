@@ -1076,3 +1076,276 @@ BalanceSheet.columns.to_list()
  'website',
  'industry_id',
  'industry_id_v2']
+
+ """
+Functions extracted from the VnStock notebook.
+This collection includes all the main functions used in the notebook for stock data analysis.
+"""
+
+# Main wrapper functions
+
+def stock(symbol='ACB', source='TCBS'):
+    """
+    Initialize a stock object for data retrieval operations.
+    
+    Parameters:
+    ----------
+    symbol : str
+        Stock symbol/ticker (default: 'ACB')
+    source : str
+        Data source, options include 'TCBS', 'VCI', 'MSN', 'HOSE' (default: 'TCBS')
+    
+    Returns:
+    -------
+    Stock object with methods for accessing different types of data
+    """
+    from vnstock import Vnstock
+    return Vnstock().stock(symbol=symbol, source=source)
+
+
+# Quote functions
+
+def history(symbol=None, start='2024-01-01', end='2024-06-21', interval='1D'):
+    """
+    Get historical price data for a stock.
+    
+    Parameters:
+    ----------
+    symbol : str
+        Stock symbol/ticker (optional if object already initialized with symbol)
+    start : str
+        Start date in 'YYYY-MM-DD' format (default: '2024-01-01')
+    end : str
+        End date in 'YYYY-MM-DD' format (default: '2024-06-21')
+    interval : str
+        Time interval for data, e.g. '1D' for daily (default: '1D')
+    
+    Returns:
+    -------
+    DataFrame with historical price data (time, open, high, low, close, volume)
+    """
+    # In actual use, this would be called from a stock object instance:
+    # stock.quote.history(symbol=symbol, start=start, end=end, interval=interval)
+    pass
+
+
+def intraday(symbol=None, page_size=1000, show_log=False):
+    """
+    Get intraday trading data (matched orders) for a stock.
+    
+    Parameters:
+    ----------
+    symbol : str
+        Stock symbol/ticker (optional if object already initialized with symbol)
+    page_size : int
+        Number of records to return (default: 1000)
+    show_log : bool
+        Whether to display log information (default: False)
+    
+    Returns:
+    -------
+    DataFrame with intraday trading data (time, price, volume, match_type)
+    """
+    # In actual use: stock.quote.intraday(symbol=symbol, page_size=page_size, show_log=show_log)
+    pass
+
+
+# Trading functions
+
+def price_board(symbols):
+    """
+    Get price board data for a list of stock symbols.
+    
+    Parameters:
+    ----------
+    symbols : list
+        List of stock symbols to retrieve data for, e.g. ['ACB', 'FPT', 'VNM']
+    
+    Returns:
+    -------
+    DataFrame with price board data including current price, volume, and various metrics
+    """
+    # In actual use: stock.trading.price_board(symbols)
+    pass
+
+
+# Company information functions
+
+def overview():
+    """
+    Get overview information for a company.
+    
+    Returns:
+    -------
+    DataFrame with company overview data including exchange, industry, outstanding shares, etc.
+    """
+    # In actual use: stock.company.overview()
+    pass
+
+
+def profile():
+    """
+    Get company profile information.
+    
+    Returns:
+    -------
+    DataFrame with detailed company profile, history, and business information
+    """
+    # In actual use: stock.company.profile()
+    pass
+
+
+def shareholders():
+    """
+    Get information about company shareholders.
+    
+    Returns:
+    -------
+    DataFrame with shareholder information including ownership percentages
+    """
+    # In actual use: stock.company.shareholders()
+    pass
+
+
+def insider_deals():
+    """
+    Get information about insider trading activities.
+    
+    Returns:
+    -------
+    DataFrame with insider deal information including dates, methods, actions, etc.
+    """
+    # In actual use: stock.company.insider_deals()
+    pass
+
+
+def subsidiaries():
+    """
+    Get information about company subsidiaries or affiliated companies.
+    
+    Returns:
+    -------
+    DataFrame with subsidiary information including ownership percentages
+    """
+    # In actual use: stock.company.subsidiaries()
+    pass
+
+
+def officers():
+    """
+    Get information about company officers/management.
+    
+    Returns:
+    -------
+    DataFrame with officer information including positions and ownership percentages
+    """
+    # In actual use: stock.company.officers()
+    pass
+
+
+def events():
+    """
+    Get information about company events like earnings announcements, dividends, etc.
+    
+    Returns:
+    -------
+    DataFrame with event information including dates, descriptions, etc.
+    """
+    # In actual use: stock.company.events()
+    pass
+
+
+def news():
+    """
+    Get company news and announcements.
+    
+    Returns:
+    -------
+    DataFrame with news information including titles, sources, and publication dates
+    """
+    # In actual use: stock.company.news()
+    pass
+
+
+def dividends():
+    """
+    Get dividend history for a company.
+    
+    Returns:
+    -------
+    DataFrame with dividend information including dates, percentages, and payment methods
+    """
+    # In actual use: stock.company.dividends()
+    pass
+
+
+# Financial report functions
+
+def balance_sheet(period='year'):
+    """
+    Get balance sheet data for a company.
+    
+    Parameters:
+    ----------
+    period : str
+        Time period, either 'year' or 'quarter' (default: 'year')
+    
+    Returns:
+    -------
+    DataFrame with balance sheet data including assets, liabilities, equity, etc.
+    """
+    # In actual use: stock.finance.balance_sheet(period=period)
+    pass
+
+
+def income_statement(period='year'):
+    """
+    Get income statement data for a company.
+    
+    Parameters:
+    ----------
+    period : str
+        Time period, either 'year' or 'quarter' (default: 'year')
+    
+    Returns:
+    -------
+    DataFrame with income statement data including revenue, expenses, profits, etc.
+    """
+    # In actual use: stock.finance.income_statement(period=period)
+    pass
+
+
+def cash_flow(period='year'):
+    """
+    Get cash flow statement data for a company.
+    
+    Parameters:
+    ----------
+    period : str
+        Time period, either 'year' or 'quarter' (default: 'year')
+    
+    Returns:
+    -------
+    DataFrame with cash flow data including operating, investing, and financing activities
+    """
+    # In actual use: stock.finance.cash_flow(period=period)
+    pass
+
+
+def ratio(period='year', dropna=True):
+    """
+    Get financial ratios for a company.
+    
+    Parameters:
+    ----------
+    period : str
+        Time period, either 'year' or 'quarter' (default: 'year')
+    dropna : bool
+        Whether to drop rows with NA values (default: True)
+    
+    Returns:
+    -------
+    DataFrame with financial ratios like P/E, P/B, ROE, ROA, etc.
+    """
+    # In actual use: stock.finance.ratio(period=period, dropna=dropna)
+    pass
