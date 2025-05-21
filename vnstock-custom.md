@@ -8,7 +8,8 @@ The VnStock library provides access to Vietnamese financial market data through 
 
 VnStock returns financial data in three main dataframes, each structured differently:
 
-1. **Ratio Dataframe**: Uses a **multi-index column structure** with two levels:
+1. **Ratio Dataframe**: Uses a **m
+ulti-index column structure** with two levels:
    - First level: Category (e.g., 'Meta', 'Chỉ tiêu khả năng sinh lợi')
    - Second level: Specific metric (e.g., 'yearReport', 'ROE (%)')
 
@@ -95,6 +96,26 @@ Ratio.columns.to_list()
  ('Chỉ tiêu định giá', 'EPS (VND)'),
  ('Chỉ tiêu định giá', 'BVPS (VND)'),
  ('Chỉ tiêu định giá', 'EV/EBITDA')]
+
+ **English Version for the Ratio dataframe**
+ [('Meta', 'ticker'),
+ ('Meta', 'yearReport'),
+ ('Meta', 'lengthReport'),
+ ('Chỉ tiêu cơ cấu nguồn vốn', 'Fixed Asset-To-Equity'),
+ ('Chỉ tiêu cơ cấu nguồn vốn', "Owners' Equity/Charter Capital"),
+ ('Chỉ tiêu khả năng sinh lợi', 'Net Profit Margin (%)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'ROE (%)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'ROA (%)'),
+ ('Chỉ tiêu khả năng sinh lợi', 'Dividend yield (%)'),
+ ('Chỉ tiêu thanh khoản', 'Financial Leverage'),
+ ('Chỉ tiêu định giá', 'Market Capital (Bn. VND)'),
+ ('Chỉ tiêu định giá', 'Outstanding Share (Mil. Shares)'),
+ ('Chỉ tiêu định giá', 'P/E'),
+ ('Chỉ tiêu định giá', 'P/B'),
+ ('Chỉ tiêu định giá', 'P/S'),
+ ('Chỉ tiêu định giá', 'P/Cash Flow'),
+ ('Chỉ tiêu định giá', 'EPS (VND)'),
+ ('Chỉ tiêu định giá', 'BVPS (VND)')]
 
 CashFlow.columns.to_list()
  ['ticker',
