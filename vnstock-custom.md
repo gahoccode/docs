@@ -1,5 +1,62 @@
+# VnStock Financial Statement Analysis Guide
+
+## Understanding VnStock Data Structures
+
+The VnStock library provides access to Vietnamese financial market data through various classes and methods. When working with financial statements, it's important to understand their unique data structures.
+
+## Key Financial Data Structures
+
+VnStock returns financial data in three main dataframes, each structured differently:
+
+1. **Ratio Dataframe**: Uses a **multi-index column structure** with two levels:
+   - First level: Category (e.g., 'Meta', 'Chỉ tiêu khả năng sinh lợi')
+   - Second level: Specific metric (e.g., 'yearReport', 'ROE (%)')
+
+2. **Balance Sheet**: Uses a flat column structure with descriptive names:
+   - 'yearReport' for time periods
+
+3. **Income Statement**: Also uses a flat column structure:
+   - 'yearReport' for time periods
+
+All three dataframes use 'yearReport' (or its multi-index equivalent) for time alignment.
+
+## Working with Multi-Index Columns
+
+The most challenging aspect of using VnStock's financial data is handling the multi-index columns in the ratio dataframe. Here's how to properly access this data:
+
+1. **Access multi-index columns with tuples**: 
+   - For year data: `df[('Meta', 'yearReport')]`
+   - For ROE data: `df[('Chỉ tiêu khả năng sinh lợi', 'ROE (%)')]`
+
+2. **Filter and set index with multi-index columns**:
+   ```
+   year_col = ('Meta', 'yearReport')
+   df_filtered = df[df[year_col].isin(years)]
+   df_by_year = df_filtered.set_index(year_col)
+   ```
+
+## Aligning Financial Data Across Statements
+
+To analyze metrics across different statements, align all data by year:
+
+1. Define year columns for each dataframe (accounting for multi-index in ratios)
+2. Set the year column as the index in each dataframe
+3. Perform calculations or comparisons using the aligned indexes
+
+## Common Challenges and Solutions
+
+ **Language Differences**: The library supports both English and Vietnamese. Be consistent with your `lang` parameter.
+
+## Best Practices
+
+2. **Handle Multi-Index Appropriately**: Check for multi-index columns and access them correctly using tuples.
+
+3. **Use Consistent Alignment**: Always align data on 'yearReport' for time series analysis.
+
 # Dataframe strucure
+The yearReport column exists, but it's part of a multi-index tuple as ('Meta', 'yearReport')
 Ratio.columns.to_list()
+
 
 [('Meta', 'CP'),
  ('Meta', 'Năm'),
