@@ -56,6 +56,8 @@ To analyze metrics across different statements, align all data by year:
 
 # Dataframe strucure
 The yearReport column exists, but it's part of a multi-index tuple as ('Meta', 'yearReport')
+
+Ratio = stock.finance.ratio(period=period, lang='vi')
 Ratio.columns.to_list()
 
 
@@ -98,6 +100,10 @@ Ratio.columns.to_list()
  ('Chỉ tiêu định giá', 'EV/EBITDA')]
 
  **English Version for the Ratio dataframe**
+
+ Ratio = stock.finance.ratio(period=period, lang='en')
+ Ratio.columns.to_list()
+
  [('Meta', 'ticker'),
  ('Meta', 'yearReport'),
  ('Meta', 'lengthReport'),
@@ -117,6 +123,7 @@ Ratio.columns.to_list()
  ('Chỉ tiêu định giá', 'EPS (VND)'),
  ('Chỉ tiêu định giá', 'BVPS (VND)')]
 
+CashFlow = stock.finance.cash_flow(period='year')
 CashFlow.columns.to_list()
  ['ticker',
  'yearReport',
@@ -155,6 +162,7 @@ CashFlow.columns.to_list()
  'Foreign exchange differences Adjustment',
  'Cash and Cash Equivalents at the end of period']
 
+BalanceSheet = stock.finance.balance_sheet(period='year', lang='en')
 BalanceSheet.columns.to_list()
  ['ticker',
  'yearReport',
