@@ -123,6 +123,7 @@ Ratio.columns.to_list()
  ('Chỉ tiêu định giá', 'EPS (VND)'),
  ('Chỉ tiêu định giá', 'BVPS (VND)')]
 
+# CashFlow Dataframe structure
 CashFlow = stock.finance.cash_flow(period='year')
 CashFlow.columns.to_list()
  ['ticker',
@@ -162,6 +163,7 @@ CashFlow.columns.to_list()
  'Foreign exchange differences Adjustment',
  'Cash and Cash Equivalents at the end of period']
 
+# Balance Sheet dataframe structure
 BalanceSheet = stock.finance.balance_sheet(period='year', lang='en')
 BalanceSheet.columns.to_list()
  ['ticker',
