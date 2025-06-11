@@ -1280,6 +1280,18 @@ def dividends():
     # In actual use: stock.company.dividends()
     pass
 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 15 entries, 0 to 14
+Data columns (total 4 columns):
+ #   Column                    Non-Null Count  Dtype  
+---  ------                    --------------  -----  
+ 0   exercise_date             15 non-null     object 
+ 1   cash_year                 15 non-null     int64  
+ 2   cash_dividend_percentage  15 non-null     float64
+ 3   issue_method              15 non-null     object 
+dtypes: float64(1), int64(1), object(2)
+memory usage: 608.0+ bytes
+
 
 # Financial report functions
 
