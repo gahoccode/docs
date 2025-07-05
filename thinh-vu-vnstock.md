@@ -235,42 +235,7 @@ quarterly_ratios = finance.ratio(period='quarter', lang='en', dropna=True)
 print(quarterly_ratios)
 ```
 
-## Complete Example
 
-Here's a complete example demonstrating how to use all the Finance class methods to retrieve various financial statements for a company:
-
-```python
-from vnstock import Vnstock
-import pandas as pd
-
-# Initialize
-stock = Vnstock().stock(symbol='VCI', source='VCI')
-
-# Get financial statements
-balance_sheet = stock.finance.balance_sheet(period='year', lang='en', dropna=True)
-income_stmt = stock.finance.income_statement(period='year', lang='en', dropna=True)
-cash_flow = stock.finance.cash_flow(period='year', lang='en', dropna=True)
-ratios = stock.finance.ratio(period='year', lang='en', dropna=True)
-
-# Display the first few rows of each
-print("Balance Sheet:")
-print(balance_sheet.head())
-
-print("\nIncome Statement:")
-print(income_stmt.head())
-
-print("\nCash Flow Statement:")
-print(cash_flow.head())
-
-print("\nFinancial Ratios:")
-print(ratios.head())
-
-# Save to CSV files
-balance_sheet.to_csv('balance_sheet.csv')
-income_stmt.to_csv('income_statement.csv')
-cash_flow.to_csv('cash_flow.csv')
-ratios.to_csv('financial_ratios.csv')
-```
 
 ## Practical Analysis Example
 
@@ -292,21 +257,6 @@ income2 = company2.finance.income_statement(period='year', lang='en', dropna=Tru
 # Get relevant rows (may vary based on actual data structure)
 revenue1 = income1.loc[income1.index.str.contains('Revenue', case=False)]
 revenue2 = income2.loc[income2.index.str.contains('Revenue', case=False)]
-
-# Create a plot
-plt.figure(figsize=(12, 6))
-plt.plot(revenue1.columns, revenue1.iloc[0], 'o-', label='VCI Revenue')
-plt.plot(revenue2.columns, revenue2.iloc[0], 's-', label='SSI Revenue')
-plt.title('Revenue Comparison: VCI vs SSI')
-plt.xlabel('Year')
-plt.ylabel('Revenue (VND)')
-plt.legend()
-plt.grid(True)
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig('revenue_comparison.png')
-plt.show()
-```
 
 ## Company Class Methods
 
@@ -508,6 +458,124 @@ The following parameters can be used in the `params` dictionary to filter stocks
    - `businessOperation`: Business operation rating (1-5)
    - `financialHealth`: Financial health rating (1-5)
 
+Use the following filter criteria to set the params parameter.
+* CANSLIM: epsGrowth1Year, lastQuarterProfitGrowth, roe, avgTradingValue20Day, relativeStrength1Month
+* Value: roe, pe, avgTradingValue20Day
+* High Dividend: dividendYield, avgTradingValue20Day
+* Breakout Buy: avgTradingValue20Day, forecastVolumeRatio, breakout: 'BULLISH'
+* Price Increase + Volume Surge: avgTradingValue20Day, forecastVolumeRatio
+* 52-Week High Breakout: avgTradingValue20Day, priceBreakOut52Week: 'BREAK_OUT'
+* 52-Week Low Breakdown: avgTradingValue20Day, priceWashOut52Week: 'WASH_OUT'
+* Short-term Uptrend: avgTradingValue20Day, uptrend: 'buy-signal'
+* Short-term Outperformance: relativeStrength3Day
+* Growth: epsGrowth1Year, roe, avgTradingValue20Day
+
+**Sector Constraints**
+* exchangeName: Stock exchange, e.g. "HOSE", "HNX", or "UPCOM". Use commas to separate multiple exchanges, e.g. "HOSE,HNX,UPCOM".
+* hasFinancialReport: Has latest financial report. 1 means yes, 0 means no.
+* industryName: Filter stocks by specific industry. Value format is Retail for retail industry. Other values can be:
+    * Insurance
+    * Real Estate
+    * Technology
+    * Oil & Gas
+    * Financial Services
+    * Utilities
+    * Travel & Leisure
+    * Industrial Goods & Services
+    * Personal & Household Goods
+    * Chemicals
+    * Banks
+    * Automobiles & Parts
+    * Basic Resources
+    * Food & Beverage
+    * Media
+    * Telecommunications
+    * Construction & Materials
+    * Health Care
+* marketCap: Market capitalization in billion VND
+* priceNearRealtime: Current stock price in VND
+* foreignVolumePercent: Foreign volume as percentage of total volume
+* alpha: Stock return over market return
+* beta: Stock volatility relative to market
+* freeTransferRate: Percentage of freely transferable shares
+**Growth**
+* revenueGrowth1Year: Revenue growth rate in past year
+* revenueGrowth5Year: Average revenue growth rate over past 5 years
+* epsGrowth1Year: Earnings per share growth rate in past year
+* epsGrowth5Year: Average earnings per share growth rate over past 5 years
+* lastQuarterRevenueGrowth: Revenue growth rate in latest quarter
+* secondQuarterRevenueGrowth: Revenue growth rate in second latest quarter
+* lastQuarterProfitGrowth: Profit growth rate in latest quarter
+* secondQuarterProfitGrowth: Profit growth rate in second latest quarter
+**Financial Ratio**
+* grossMargin: Gross profit margin
+* netMargin: Net profit margin
+* roe: Return on equity
+* doe: Dividend on equity
+* dividendYield: Dividend yield
+* eps: Earnings per share in VND
+* pe: Price to earnings ratio
+* pb: Price to book ratio
+* evEbitda: Enterprise value to EBITDA ratio
+* netCashPerMarketCap: Net cash to market cap ratio
+* netCashPerTotalAssets: Net cash to total assets ratio
+* profitForTheLast4Quarters: Total profit in last 4 quarters in billion VND
+**Price and Volume Volatility**
+* suddenlyHighVolumeMatching: Signal indicating sudden surge in matched volume. 0 means no, 1 means yes
+* totalTradingValue: Total trading value today in billion VND
+* avgTradingValue5Day: Average trading value over 5 days in billion VND
+* avgTradingValue10Day: Average trading value over 10 days in billion VND
+* avgTradingValue20Day: Average trading value over 20 days in billion VND
+* priceGrowth1Week: Price growth rate over past week
+* priceGrowth1Month: Price growth rate over past month
+* percent1YearFromPeak: Percentage change from 1-year high
+* percentAwayFromHistoricalPeak: Percentage change from all-time high
+* percent1YearFromBottom: Percentage change from 1-year low
+* percentOffHistoricalBottom: Percentage change from all-time low
+* priceVsSMA5: Price vs 5-day SMA relationship. Values can be ABOVE, BELOW, CROSS_ABOVE, or CROSS_BELOW
+* priceVsSma10: Price vs 10-day SMA relationship. Values can be ABOVE, BELOW, CROSS_ABOVE, or CROSS_BELOW
+* priceVsSMA20: Price vs 20-day SMA relationship. Values can be ABOVE, BELOW, CROSS_ABOVE, or CROSS_BELOW
+* priceVsSma50: Price vs 50-day SMA relationship. Values can be ABOVE, BELOW, CROSS_ABOVE, or CROSS_BELOW
+* priceVsSMA100: Price vs 100-day SMA relationship. Values can be ABOVE, BELOW, CROSS_ABOVE, or CROSS_BELOW
+* forecastVolumeRatio: Ratio of forecast volume to actual volume today
+* volumeVsVSma5: Current volume vs 5-day volume SMA ratio
+* volumeVsVSma10: Current volume vs 10-day volume SMA ratio
+* volumeVsVSma20: Current volume vs 20-day volume SMA ratio
+* volumeVsVSma50: Current volume vs 50-day volume SMA ratio
+**Market Behavior**
+* strongBuyPercentage: Percentage of strong buy signals based on technical analysis
+* activeBuyPercentage: Percentage of active buy signals based on technical analysis
+* foreignTransaction: Foreign trading type today. Values can be buyMoreThanSell, sellMoreThanBuy, or noTransaction
+* foreignBuySell20Session: Net foreign buy/sell value in last 20 sessions in billion VND
+* numIncreaseContinuousDay: Number of consecutive up days
+* numDecreaseContinuousDay: Number of consecutive down days
+**Technical Signals**
+* rsi14: 14-day Relative Strength Index
+* rsi14Status: RSI status. Values can be intoOverBought, intoOverSold, outOfOverBought, or outOfOverSold
+* tcbsBuySellSignal: TCBS buy/sell signal. Values can be BUY or SELL
+* priceBreakOut52Week: 52-week price breakout signal. Values can be BREAK_OUT or NO_BREAK_OUT
+* priceWashOut52Week: 52-week price washout signal. Values can be WASH_OUT or NO_WASH_OUT
+* macdHistogram: MACD histogram signal. Values can be macdHistGT0Increase, macdHistGT0Decrease, macdHistLT0Increase, or macdHistLT0Decrease
+* relativeStrength3Day: 3-day relative strength vs market
+* relativeStrength1Month: 1-month relative strength vs market
+* relativeStrength3Month: 3-month relative strength vs market
+* relativeStrength1Year: 1-year relative strength vs market
+* tcRS: TCBS relative strength vs market
+* sarVsMacdHist: SAR vs MACD histogram signal. Values can be BUY or SELL
+**Trading Signal**
+* bollingBandSignal: Bollinger Band signal. Values can be BUY or SELL
+* dmiSignal: Directional Movement Index signal. Values can be BUY or SELL
+* uptrend: Uptrend signal. Values can be buy-signal or sell-signal
+* breakout: Breakout signal. Values can be BULLISH or BEARISH
+**TCBS Rating**
+* tcbsRecommend: TCBS recommendation. Values can be BUY or SELL
+* stockRating: TCBS stock rating score. Scale 1-5, with 5 being best
+* businessModel: TCBS business model rating. Scale 1-5, with 5 being best
+* financialHealth: TCBS financial health rating. Scale 1-5, with 5 being best
+
+
+For a comprehensive list of all available screening parameters and conditions, refer to the official documentation: [Screening Parameters Reference](https://docs.vnstock.site/functions/screener/#ieu-kien-loc)
+
 ```python
 from vnstock import Vnstock
 
@@ -601,131 +669,7 @@ Data columns (total 84 columns):
  83  heating_up                     10 non-null     object 
 # Now access various components through stock objects
 # For example: stock.finance, stock.company, stock.quote, etc.
-```
 
-### Example Use Case: CANSLIM Stock Screening
-
-The CANSLIM investment strategy focuses on growth stocks. Here's how to implement it with vnstock:
-
-**Method 1: Using the Vnstock class (Recommended)**
-```python
-from vnstock import Vnstock
-import pandas as pd
-
-# Initialize
-stock = Vnstock()
-
-# CANSLIM parameters
-params = {
-    "exchangeName": "HOSE,HNX,UPCOM",
-    "epsGrowth1Year": (25, 999),            # Strong earnings growth
-    "lastQuarterProfitGrowth": (20, 999),   # Recent quarterly growth
-    "roe": (15, 999),                       # High return on equity
-    "avgTradingValue20Day": (5000000, 999999999999),  # High trading volume
-    "relativeStrength1Month": (10, 999)     # Strong relative strength
-}
-
-# Get CANSLIM stocks
-canslim_stocks = stock.screener.stock(params=params, limit=100)
-
-# Sort by EPS growth for best candidates
-canslim_stocks = canslim_stocks.sort_values(by='epsGrowth1Year', ascending=False)
-
-print("Top 10 CANSLIM Stock Candidates:")
-print(canslim_stocks.head(10))
-
-# Export to CSV
-canslim_stocks.to_csv('canslim_stocks.csv')
-```
-
-**Method 2: Direct import of Screener class**
-```python
-from vnstock import Screener
-import pandas as pd
-
-# Initialize
-screener = Screener()
-
-# CANSLIM parameters
-params = {
-    "exchangeName": "HOSE,HNX,UPCOM",
-    "epsGrowth1Year": (25, 999),            # Strong earnings growth
-    "lastQuarterProfitGrowth": (20, 999),   # Recent quarterly growth
-    "roe": (15, 999),                       # High return on equity
-    "avgTradingValue20Day": (5000000, 999999999999),  # High trading volume
-    "relativeStrength1Month": (10, 999)     # Strong relative strength
-}
-
-# Get CANSLIM stocks
-canslim_stocks = screener.stock(params=params, limit=100)
-
-# Sort by EPS growth for best candidates
-canslim_stocks = canslim_stocks.sort_values(by='epsGrowth1Year', ascending=False)
-
-print("Top 10 CANSLIM Stock Candidates:")
-print(canslim_stocks.head(10))
-
-# Export to CSV
-canslim_stocks.to_csv('canslim_stocks.csv')
-```
-
-## Complete Example: Multi-Class Analysis
-
-Here's a complete example demonstrating how to use all the classes together to perform a comprehensive analysis:
-
-```python
-from vnstock import Vnstock
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# Initialize with two different companies for comparison
-stock1 = Vnstock().stock(symbol='VCB', source='VCI')
-stock2 = Vnstock().stock(symbol='TCB', source='VCI')
-
-# 1. Get company profile information
-profile1 = stock1.company.profile(lang='en')
-profile2 = stock2.company.profile(lang='en')
-print("Company Profiles:")
-print(f"VCB: {profile1['organShortName'].values[0]}")
-print(f"TCB: {profile2['organShortName'].values[0]}")
-
-# 2. Get financial data
-income1 = stock1.finance.income_statement(period='year', lang='en', dropna=True)
-income2 = stock2.finance.income_statement(period='year', lang='en', dropna=True)
-
-ratios1 = stock1.finance.ratio(period='year', lang='en', dropna=True)
-ratios2 = stock2.finance.ratio(period='year', lang='en', dropna=True)
-
-# 3. Perform screening for similar companies in the banking sector
-screener = Vnstock().screener
-bank_params = {
-    "exchangeName": "HOSE,HNX,UPCOM",
-    "industryName": "Banking",
-    "marketCap": (50000, 999999999),  # Large banks only
-    "roe": (10, 999)                  # Good profitability
-}
-banks = screener.stock(params=bank_params, limit=10)
-
-# 4. Compare ROE of the banks
-plt.figure(figsize=(12, 6))
-plt.bar(banks['ticker'], banks['roe'])
-plt.title('ROE Comparison of Vietnamese Banks')
-plt.xlabel('Bank Ticker')
-plt.ylabel('Return on Equity (%)')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig('bank_roe_comparison.png')
-
-# 5. Create final analysis report
-print("\nBank Analysis Results:")
-print(f"Total banks analyzed: {len(banks)}")
-print(f"Highest ROE Bank: {banks.loc[banks['roe'].idxmax(), 'ticker']} with ROE of {banks['roe'].max():.2f}%")
-print(f"Average Banking Sector ROE: {banks['roe'].mean():.2f}%")
-print(f"VCB ROE: {banks.loc[banks['ticker'] == 'VCB', 'roe'].values[0]:.2f}%")
-print(f"TCB ROE: {banks.loc[banks['ticker'] == 'TCB', 'roe'].values[0]:.2f}%")
-
-# Export results
-banks.to_csv('vietnamese_banks_analysis.csv')
 ```
 # Example Use Cases for vnstock Library
 
@@ -739,7 +683,7 @@ from vnstock import Vnstock
 stock = Vnstock().stock(symbol='ACB', source='VCI')
 ```
 
-## 2. Market Overview Analysis
+## 2. Listing Stocks
 
 **Get list of all VN30 stocks for market analysis:**
 ```python
@@ -747,100 +691,15 @@ vn30_stocks = stock.listing.symbols_by_group('VN30')
 print(f"There are {len(vn30_stocks)} stocks in the VN30 index")
 ```
 
-**Create a market dashboard for top banking stocks:**
-```python
-banking_board = stock.trading.price_board(['VCB','ACB','TCB','BID','MBB'])
-# Format as a dashboard with key metrics
-banking_board_display = banking_board[['listing.symbol', 'match.match_price', 
-                                       'match.price_change_ratio', 'match.total_volume']]
-```
 
-## 3. Technical Analysis
+## 3. Index Data
 
 **Get historical data for moving average analysis:**
 ```python
 import pandas as pd
-import matplotlib.pyplot as plt
 
 # Get 1-year historical data for VNIndex
 vnindex_hist = stock.quote.history(symbol='VNINDEX', start='2024-01-01', end='2025-03-19', interval='1D')
-
-# Calculate moving averages
-vnindex_hist['MA20'] = vnindex_hist['close'].rolling(window=20).mean()
-vnindex_hist['MA50'] = vnindex_hist['close'].rolling(window=50).mean()
-vnindex_hist['MA200'] = vnindex_hist['close'].rolling(window=200).mean()
-
-# Plot the chart
-plt.figure(figsize=(12, 6))
-plt.plot(vnindex_hist['time'], vnindex_hist['close'], label='VNINDEX')
-plt.plot(vnindex_hist['time'], vnindex_hist['MA20'], label='MA20')
-plt.plot(vnindex_hist['time'], vnindex_hist['MA50'], label='MA50')
-plt.plot(vnindex_hist['time'], vnindex_hist['MA200'], label='MA200')
-plt.title('VNINDEX with Moving Averages')
-plt.legend()
-plt.grid(True)
-```
-
-**Analyze intraday trading pattern:**
-```python
-# Get intraday data to analyze trading volume by time of day
-intraday = stock.quote.intraday(symbol='ACB', page_size=10000)
-
-# Group data by hour to see time-based trading patterns
-intraday['hour'] = pd.to_datetime(intraday['time']).dt.hour
-hourly_volume = intraday.groupby('hour')['volume'].sum()
-```
-
-## 4. Fundamental Analysis
-
-**Evaluate company financial health:**
-```python
-# Get balance sheet and income statement data
-balance_sheet = stock.finance.balance_sheet(period='year', lang='en')
-income_stmt = stock.finance.income_statement(period='year', lang='en')
-
-# Calculate basic financial metrics year-over-year
-recent_years = balance_sheet['yearReport'].unique()[-5:]  # Last 5 years
-filtered_bs = balance_sheet[balance_sheet['yearReport'].isin(recent_years)]
-filtered_is = income_stmt[income_stmt['yearReport'].isin(recent_years)]
-
-# Calculate debt-to-equity trend
-filtered_bs['debt_to_equity'] = (filtered_bs['TOTAL ASSETS (Bn. VND)'] - filtered_bs['OWNER\'S EQUITY(Bn.VND)']) / filtered_bs['OWNER\'S EQUITY(Bn.VND)']
-
-# Plot financial metrics trend
-plt.figure(figsize=(12, 8))
-plt.subplot(2, 1, 1)
-plt.plot(filtered_is['yearReport'], filtered_is['Revenue (Bn. VND)'], marker='o', label='Revenue')
-plt.plot(filtered_is['yearReport'], filtered_is['Attribute to parent company (Bn. VND)'], marker='o', label='Net Profit')
-plt.title('Revenue and Profit Trend')
-plt.legend()
-
-plt.subplot(2, 1, 2)
-plt.plot(filtered_bs['yearReport'], filtered_bs['debt_to_equity'], marker='o')
-plt.title('Debt-to-Equity Ratio')
-```
-
-## 5. Competitor Analysis
-
-```python
-# Compare financial ratios across banking sector
-banks = ['VCB', 'ACB', 'TCB', 'BID', 'MBB']
-bank_ratios = {}
-
-for bank in banks:
-    bank_stock = Vnstock().stock(symbol=bank, source='VCI')
-    ratios = bank_stock.finance.ratio(period='year', lang='en').iloc[0]  # Most recent year
-    bank_ratios[bank] = {
-        'ROE': ratios['ROE (%)'],
-        'ROA': ratios['ROA (%)'],
-        'P/E': ratios['P/E'],
-        'P/B': ratios['P/B']
-    }
-
-bank_comparison = pd.DataFrame(bank_ratios).T
-print("Banking Sector Comparison:")
-print(bank_comparison)
-```
 
 ## 6. Investment Screening
 
@@ -895,20 +754,6 @@ for index, event in dividend_events.iterrows():
     # ...
 ```
 
-## 9. Seasonal Performance Analysis
-
-```python
-# Analyze quarterly performance patterns over multiple years
-quarterly_data = stock.finance.income_statement(period='quarter', lang='en')
-
-# Group by quarter to analyze seasonal patterns
-quarterly_data['quarter'] = quarterly_data['lengthReport']
-quarterly_perf = quarterly_data.groupby(['yearReport', 'quarter'])['Revenue YoY (%)'].mean().unstack()
-
-# Plot seasonal performance by quarter
-quarterly_perf.mean().plot(kind='bar', figsize=(10, 6), title='Average Quarterly Performance')
-```
-
 ## 10. News Sentiment Analysis
 
 ```python
@@ -919,27 +764,23 @@ from textblob import TextBlob  # You'll need to install this package
 # Get recent news
 recent_news = stock.company.news().head(20)
 
-# Simple sentiment analysis function
-def analyze_sentiment(text):
-    if isinstance(text, str):
-        # Clean text
-        text = re.sub(r'<[^>]+>', '', text)  # Remove HTML tags
-        return TextBlob(text).sentiment.polarity  # Return polarity (-1 to 1)
-    return 0
+# Data structure for financial statements dataframes 
 
-# Apply sentiment analysis to news titles
-recent_news['sentiment'] = recent_news['news_title'].apply(analyze_sentiment)
+```python
+from vnstock import Vnstock
+import pandas as pd
 
-# Classify sentiment
-recent_news['sentiment_category'] = recent_news['sentiment'].apply(
-    lambda x: 'Positive' if x > 0.05 else ('Negative' if x < -0.05 else 'Neutral'))
+# Initialize
+stock = Vnstock().stock(symbol='VCI', source='VCI')
 
-# Count by sentiment
-sentiment_count = recent_news['sentiment_category'].value_counts()
-print("News Sentiment Analysis:")
-print(sentiment_count)
-```
-Ratio.columns.to_list()
+# Get financial statements
+balance_sheet = stock.finance.balance_sheet(period='year', lang='en', dropna=True)
+income_stmt = stock.finance.income_statement(period='year', lang='en', dropna=True)
+cash_flow = stock.finance.cash_flow(period='year', lang='en', dropna=True)
+ratios = stock.finance.ratio(period='year', lang='en', dropna=True)
+
+ratio.columns.to_list()
+
 [('Meta', 'CP'),
  ('Meta', 'Năm'),
  ('Meta', 'Kỳ'),
@@ -978,7 +819,7 @@ Ratio.columns.to_list()
  ('Chỉ tiêu định giá', 'BVPS (VND)'),
  ('Chỉ tiêu định giá', 'EV/EBITDA')]
 
-CashFlow.columns.to_list()
+cash_flow.columns.to_list()
  ['ticker',
  'yearReport',
  'Net Profit/Loss before tax',
@@ -1016,7 +857,7 @@ CashFlow.columns.to_list()
  'Foreign exchange differences Adjustment',
  'Cash and Cash Equivalents at the end of period']
 
-BalanceSheet.columns.to_list()
+balance_sheet.columns.to_list()
  ['ticker',
  'yearReport',
  'CURRENT ASSETS (Bn. VND)',
