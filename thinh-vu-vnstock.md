@@ -924,7 +924,36 @@ balance_sheet.columns.to_list()
 Functions extracted from the VnStock notebook.
 This collection includes all the main functions used in the notebook for stock data analysis.
 """
+fund_list = fund.listing()
 
+fund_list.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 57 entries, 0 to 56
+Data columns (total 21 columns):
+ #   Column                     Non-Null Count  Dtype  
+---  ------                     --------------  -----  
+ 0   short_name                 57 non-null     object 
+ 1   name                       57 non-null     object 
+ 2   fund_type                  57 non-null     object 
+ 3   fund_owner_name            57 non-null     object 
+ 4   management_fee             57 non-null     float64
+ 5   inception_date             48 non-null     object 
+ 6   nav                        57 non-null     float64
+ 7   nav_change_previous        57 non-null     float64
+ 8   nav_change_last_year       54 non-null     float64
+ 9   nav_change_inception       57 non-null     float64
+ 10  nav_change_1m              57 non-null     float64
+ 11  nav_change_3m              56 non-null     float64
+ 12  nav_change_6m              54 non-null     float64
+ 13  nav_change_12m             51 non-null     float64
+ 14  nav_change_24m             44 non-null     float64
+ 15  nav_change_36m             35 non-null     float64
+ 16  nav_change_36m_annualized  35 non-null     float64
+ 17  nav_update_at              57 non-null     object 
+ 18  fund_id_fmarket            57 non-null     int64  
+ 19  fund_code                  57 non-null     object 
+ 20  vsd_fee_id                 57 non-null     object 
+dtypes: float64(12), int64(1), object(8)
 # Main wrapper functions
 
 def stock(symbol='ACB', source='TCBS'):
