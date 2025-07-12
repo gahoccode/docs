@@ -954,6 +954,110 @@ Data columns (total 21 columns):
  19  fund_code                  57 non-null     object 
  20  vsd_fee_id                 57 non-null     object 
 dtypes: float64(12), int64(1), object(8)
+
+# Fund Data Functions
+
+The vnstock library provides access to fund data from fmarket.vn, allowing investors to easily retrieve and analyze investment fund information.
+
+## Initialization
+
+To access fund data, you can use the `Fund` class directly or through the Vnstock class:
+
+```python
+# Method 1: Direct import of Fund class
+from vnstock import Fund
+fund = Fund()
+
+# Method 2: Using the Vnstock class
+from vnstock import Vnstock
+fund = Vnstock().fund()
+```
+
+## Fund Listing
+
+Retrieves a list of all available funds or filtered by fund type.
+
+### Parameters:
+
+- `fund_type` (str, optional): Type of fund to filter by. Options include:
+  - `'BALANCED'`: Balanced funds
+  - `'BOND'`: Bond funds
+  - `'STOCK'`: Stock funds
+  - `''`: Empty string (default) - All funds
+
+### Example Usage:
+
+```python
+# Get all funds
+all_funds = fund.listing()
+
+# Get only stock funds
+stock_funds = fund.listing(fund_type='STOCK')
+```
+
+### Sample Output:
+
+```
+Total number of funds currently listed on Fmarket: 49
+  short_name                  fund_name fund_type  inception_date  \
+0     VESAF  Quỹ đầu tư cổ phiếu Việt Nam     STOCK     2017-04-10   
+1     VNDAF  Quỹ đầu tư cổ phiếu Tăng trưởng VINACAPITAL     STOCK     2018-04-12   
+
+   nav_at_inception  current_nav  nav_change_1w  nav_change_1m  \
+0          10000.0      19359.0          -0.35          -1.22   
+1          10000.0      17750.0          -0.45          -1.28   
+```
+
+## Fund Details
+
+### Asset Holdings
+
+Retrieves the asset allocation breakdown for a specific fund.
+
+#### Parameters:
+
+- `symbol` (str, required): Fund symbol/ticker
+
+#### Example Usage:
+
+```python
+# Get asset holdings for a specific fund
+asset_holdings = fund.details.asset_holding('SSISCA')
+```
+
+#### Sample Output:
+
+```
+Retrieving data for SSISCA
+   asset_percent                asset_type short_name
+0          83.08                  Cổ phiếu     SSISCA
+1          16.92  Tiền và tương đương tiền     SSISCA
+```
+
+### Industry Allocation
+
+Retrieves the industry allocation breakdown for a specific fund.
+
+#### Parameters:
+
+- `symbol` (str, required): Fund symbol/ticker
+
+#### Example Usage:
+
+```python
+# Get industry allocation for a specific fund
+industry_allocation = fund.details.industry_holding('SSISCA')
+```
+
+#### Sample Output:
+
+```
+              industry  net_asset_percent short_name
+0                Ngân hàng           19.25     SSISCA
+1                Bất động sản          13.83     SSISCA
+2                  Bán lẻ           10.63     SSISCA
+```
+
 # Main wrapper functions
 
 def stock(symbol='ACB', source='TCBS'):
