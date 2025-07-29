@@ -677,16 +677,33 @@ Data columns (total 6 columns):
 
 
 ## 7. Ownership Analysis
-
-```python
 # Analyze foreign ownership in a company
+
+```python   
 company_info = stock.company
 ownership = company_info.shareholders()
+```
+
+```python 
+ownership.info()
+```
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 88 entries, 0 to 87
+Data columns (total 5 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   id                 88 non-null     object 
+ 1   share_holder       88 non-null     object 
+ 2   quantity           88 non-null     int64  
+ 3   share_own_percent  88 non-null     float64
+ 4   update_date        88 non-null     object 
 
 # Calculate total percent owned by foreigners
 foreign_owners = ownership[ownership['share_holder'].str.contains('Limited|Ltd|LLC|Fund|Corp', case=False, na=False)]
 foreign_ownership_pct = foreign_owners['share_own_percent'].sum()
 
+```python
 print(f"Foreign ownership percentage: {foreign_ownership_pct:.2%}")
 ```
 
