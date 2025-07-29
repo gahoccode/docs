@@ -712,26 +712,33 @@ print(f"Foreign ownership percentage: {foreign_ownership_pct:.2%}")
 ```python
 # Analyze stock performance around dividend events
 events = stock.company.events()
-dividend_events = events[events['event_list_name'] == 'Trả cổ tức bằng tiền mặt']
 
-for index, event in dividend_events.iterrows():
-    # Get stock prices around the ex-dividend date
-    exright_date = event['exright_date']
-    start_date = pd.to_datetime(exright_date) - pd.Timedelta(days=30)
-    end_date = pd.to_datetime(exright_date) + pd.Timedelta(days=30)
-    
-    # Convert dates to the required string format 'YYYY-MM-DD'
-    start_str = start_date.strftime('%Y-%m-%d')
-    end_str = end_date.strftime('%Y-%m-%d')
-    
-    # Get price history around the event
-    event_prices = stock.quote.history(start=start_str, end=end_str, interval='1D')
-    
-    # Additional analysis on price behavior before/after ex-dividend date
-    # ...
+events.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 37 entries, 0 to 36
+Data columns (total 13 columns):
+ #   Column               Non-Null Count  Dtype  
+---  ------               --------------  -----  
+ 0   id                   37 non-null     object 
+ 1   event_title          37 non-null     object 
+ 2   en__event_title      37 non-null     object 
+ 3   public_date          37 non-null     object 
+ 4   issue_date           37 non-null     object 
+ 5   source_url           37 non-null     object 
+ 6   event_list_code      37 non-null     object 
+ 7   ratio                22 non-null     float64
+ 8   value                22 non-null     float64
+ 9   record_date          37 non-null     object 
+ 10  exright_date         37 non-null     object 
+ 11  event_list_name      37 non-null     object 
+ 12  en__event_list_name  37 non-null     object
+
+
+
+
 ```
 
-## 10. News Sentiment Analysis
+## 10. News Analysis
 
 ```python
 # Basic news sentiment analysis
@@ -739,7 +746,33 @@ import re
 from textblob import TextBlob  # You'll need to install this package
 
 # Get recent news
-recent_news = stock.company.news().head(20)
+recent_news = stock.company.news()
+recent_news.info()
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 10 entries, 0 to 9
+Data columns (total 18 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   id                  10 non-null     object 
+ 1   news_title          10 non-null     object 
+ 2   news_sub_title      10 non-null     object 
+ 3   friendly_sub_title  10 non-null     object 
+ 4   news_image_url      10 non-null     object 
+ 5   news_source_link    10 non-null     object 
+ 6   created_at          0 non-null      object 
+ 7   public_date         10 non-null     int64  
+ 8   updated_at          0 non-null      object 
+ 9   lang_code           10 non-null     object 
+ 10  news_id             10 non-null     object 
+ 11  news_short_content  10 non-null     object 
+ 12  news_full_content   10 non-null     object 
+ 13  close_price         10 non-null     int64  
+ 14  ref_price           10 non-null     int64  
+ 15  floor               10 non-null     int64  
+ 16  ceiling             10 non-null     int64  
+ 17  price_change_pct    10 non-null     float64
+
 
 # Data structure for financial statements dataframes 
 
