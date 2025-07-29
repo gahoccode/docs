@@ -701,20 +701,19 @@ import pandas as pd
 # Get 1-year historical data for VNIndex
 vnindex_hist = stock.quote.history(symbol='VNINDEX', start='2024-01-01', end='2025-03-19', interval='1D')
 
-## 6. Investment Screening
+vnindex_hist.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 500 entries, 0 to 499
+Data columns (total 6 columns):
+ #   Column  Non-Null Count  Dtype         
+---  ------  --------------  -----         
+ 0   time    500 non-null    datetime64[ns]
+ 1   open    500 non-null    float64       
+ 2   high    500 non-null    float64       
+ 3   low     500 non-null    float64       
+ 4   close   500 non-null    float64       
+ 5   volume  500 non-null    int64         
 
-```python
-# Screen for high-ROE stocks with low P/B ratio
-screener = stock.screener.stock(params={"exchangeName": "HOSE"}, limit=100)
-filtered_stocks = screener[(screener['roe'] > 15) & 
-                          (screener['price_vs_sma100'] == 'Giá nằm trên SMA(100)') &
-                          (screener['last_quarter_profit_growth'] > 0)]
-
-# Sort by market cap to find the largest companies meeting criteria
-investment_candidates = filtered_stocks.sort_values('market_cap', ascending=False).head(10)
-print("Top 10 Investment Candidates:")
-print(investment_candidates[['ticker', 'market_cap', 'roe', 'last_quarter_profit_growth']])
-```
 
 ## 7. Ownership Analysis
 
