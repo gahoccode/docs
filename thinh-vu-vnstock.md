@@ -258,45 +258,6 @@ income2 = company2.finance.income_statement(period='year', lang='en', dropna=Tru
 revenue1 = income1.loc[income1.index.str.contains('Revenue', case=False)]
 revenue2 = income2.loc[income2.index.str.contains('Revenue', case=False)]
 
-## Company Class Methods
-
-The `Company` class provides methods to access company profile and information.
-
-### 1. `profile()` - Company Profile Information
-
-Retrieves detailed company profile information including business description, sector, industry, and key details.
-
-#### Parameters:
-
-- `lang` (str): Language for column names and labels, options:
-  - `'vi'`: Vietnamese (default)
-  - `'en'`: English
-
-#### Example Usage:
-
-**Method 1: Using the Vnstock class (Recommended)**
-```python
-from vnstock import Vnstock
-
-# Initialize with stock symbol and source
-stock = Vnstock().stock(symbol='VCI', source='VCI')
-
-# Get company profile information
-company_profile = stock.company.profile(lang='en')
-print(company_profile)
-```
-
-**Method 2: Direct import of Company class**
-```python
-from vnstock import Company
-
-# Initialize Company class directly
-company = Company(symbol='VCI')
-
-# Get company profile information
-company_profile = company.profile(lang='en')
-print(company_profile)
-```
 
 ### 2. `officers()` - Company Officers/Management
 
