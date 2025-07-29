@@ -661,7 +661,7 @@ import pandas as pd
 
 # Get 1-year historical data for VNIndex
 vnindex_hist = stock.quote.history(symbol='VNINDEX', start='2024-01-01', end='2025-03-19', interval='1D')
-```
+
 
 vnindex_hist.info()
 <class 'pandas.core.frame.DataFrame'>
@@ -675,7 +675,7 @@ Data columns (total 6 columns):
  3   low     500 non-null    float64       
  4   close   500 non-null    float64       
  5   volume  500 non-null    int64         
-
+```
 
 ## 7. Ownership Analysis
 # Analyze foreign ownership in a company
@@ -688,7 +688,7 @@ ownership = company_info.shareholders()
 ```python 
 ownership.info()
 ```
-
+```python
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 88 entries, 0 to 87
 Data columns (total 5 columns):
@@ -699,6 +699,7 @@ Data columns (total 5 columns):
  2   quantity           88 non-null     int64  
  3   share_own_percent  88 non-null     float64
  4   update_date        88 non-null     object 
+```
 
 # Calculate total percent owned by foreigners
 foreign_owners = ownership[ownership['share_holder'].str.contains('Limited|Ltd|LLC|Fund|Corp', case=False, na=False)]
