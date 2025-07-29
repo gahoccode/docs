@@ -661,6 +661,7 @@ import pandas as pd
 
 # Get 1-year historical data for VNIndex
 vnindex_hist = stock.quote.history(symbol='VNINDEX', start='2024-01-01', end='2025-03-19', interval='1D')
+```
 
 vnindex_hist.info()
 <class 'pandas.core.frame.DataFrame'>
