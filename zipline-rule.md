@@ -12,7 +12,11 @@ A minimal working pipeline downloads Vietnamese stocks (VNM, VCB, VHM), converts
 
 **Installation and versioning:** vnstock3 v3.2.6 (released May 23, 2025) requires Python ≥3.10 and installs via `pip install vnstock==3.2.6`. The package uses a custom license limited to personal, research, and non-commercial use—commercial applications require licensing from support@vnstocks.com. The API has undergone significant evolution from earlier versions, with v3.2.6 introducing KRX standard futures contract support and fixing critical timezone inconsistencies.
 
-**Primary data extraction method:** The core interface uses `Vnstock().stock(symbol, source).quote.history()` for daily OHLCV retrieval. Two data sources exist: **VCI (recommended)** provides broader asset coverage including stocks, futures, covered warrants, bonds, ETFs, and indices across HOSE/HNX/UPCOM exchanges; **TCBS** focuses on stock data with more limited functionality. The method signature accepts start/end dates in YYYY-MM-DD string format, interval specification (1D for daily, 1H/15m for intraday), and returns pandas DataFrames with timezone-aware datetime64[ns] timestamps.
+**Primary data extraction method:** The core interface uses `Vnstock().stock(symbol, source).quote.history()` for daily OHLCV retrieval. Two data sources exist: 
+
+**VCI (recommended)** provides broader asset coverage including stocks, futures, covered warrants, bonds, ETFs, and indices across HOSE/HNX/UPCOM exchanges; 
+
+**TCBS** focuses on stock data with more limited functionality. The method signature accepts start/end dates in YYYY-MM-DD string format, interval specification (1D for daily, 1H/15m for intraday), and returns pandas DataFrames with timezone-aware datetime64[ns] timestamps.
 
 ```python
 from vnstock import Vnstock
@@ -25,11 +29,17 @@ df = stock.quote.history(start='2020-01-01', end='2024-05-25', interval='1D')
 # DataFrame shape: ~1095 rows × 6 columns for 4+ years of data
 ```
 
-**Data structure and types:** vnstock3 returns DataFrames with six columns: `time` (datetime64[ns] timezone-aware), `open`/`high`/`low`/`close` (float64 in VND for stocks), and `volume` (int64 as share count). The data is **automatically adjusted** for all corporate actions—splits, stock dividends, and cash dividends modify historical prices proportionally. **No unadjusted data access exists** through the API. The adjustment methodology applies proportional factors to all historical prices prior to corporate action dates, meaning a 2:1 split on 2024-01-15 would retroactively halve all prices before that date.
+**Data structure and types:** vnstock3 returns DataFrames with six columns: `time` (datetime64[ns] timezone-aware), `open`/`high`/`low`/`close` (float64 in VND for stocks), and `volume` (int64 as share count). 
+
+The data is **automatically adjusted** for all corporate actions—splits, stock dividends, and cash dividends modify historical prices proportionally. 
+
+**No unadjusted data access exists** through the API. The adjustment methodology applies proportional factors to all historical prices prior to corporate action dates, meaning a 2:1 split on 2024-01-15 would retroactively halve all prices before that date.
 
 **API rate limits and batch processing:** No explicit public rate limits exist, but underlying VCI/TCBS sources throttle requests. Best practices involve 500ms delays between symbol requests and implementing exponential backoff retry logic using the tenacity library. The API lacks native batch download methods—multi-symbol downloads require manual iteration with proper rate limiting. vnstock3 v3.2.1+ includes proactive rate limit warnings and v3.2.3 added built-in retry mechanisms.
 
-**Data availability and historical depth:** Historical data extends back to each asset's listing date, with VNINDEX data available from July 28, 2000 (base date). **Critical historical note:** Prior to March 1, 2002, Vietnamese markets traded only on alternate days. Intraday data (1m, 5m, 15m intervals) has limited historical depth and is only accessible during trading hours (9:00 AM - 3:00 PM GMT+7). For daily data, the full historical range is available regardless of listing age.
+**Data availability and historical depth:** Historical data extends back to each asset's listing date, with VNINDEX data available from July 28, 2000 (base date). 
+
+**Critical historical note:** Prior to March 1, 2002, Vietnamese markets traded only on alternate days. Intraday data (1m, 5m, 15m intervals) has limited historical depth and is only accessible during trading hours (9:00 AM - 3:00 PM GMT+7). For daily data, the full historical range is available regardless of listing age.
 
 ## Zipline Reloaded CSV bundle format: Exact specifications
 
@@ -42,9 +52,13 @@ date,open,high,low,close,volume,dividend,split
 2012-01-05,59.278572,59.792858,58.952858,59.718571,67817400,0.0,1.0
 ```
 
-**Date formatting requirements:** The date column requires timezone-naive strings in YYYY-MM-DD format (daily) or YYYY-MM-DD HH:MM:SS (minute). **Critical constraint:** While CSV dates are timezone-naive, Zipline internally converts everything to UTC using the specified trading calendar. The start_session and end_session parameters in bundle registration MUST have `tz='utc'` or ingestion fails.
+**Date formatting requirements:** The date column requires timezone-naive strings in YYYY-MM-DD format (daily) or YYYY-MM-DD HH:MM:SS (minute). 
+
+**Critical constraint:** While CSV dates are timezone-naive, Zipline internally converts everything to UTC using the specified trading calendar. The start_session and end_session parameters in bundle registration MUST have `tz='utc'` or ingestion fails.
 
 **Directory structure:** Organize files as `/path/to/csvdir/daily/{SYMBOL}.csv` and `/path/to/csvdir/minute/{SYMBOL}.csv`. Symbol names are extracted from filenames by removing the .csv extension, so AAPL.csv becomes symbol AAPL. Case sensitivity applies—filenames determine symbol names exactly.
+
+
 
 **Corporate actions handling:** The csvdir bundle embeds splits and dividends within each CSV file rather than using separate metadata files. The `dividend` column holds cash dividend amounts (0.0 when absent), while `split` column contains ratios (1.0 for no split, 2.0 for 2-for-1 split). **Important convention:** Use the actual split multiplier, not the inverse—a 2:1 split is 2.0, not 0.5. Both values apply on ex-dividend dates.
 
@@ -67,7 +81,53 @@ register(
 )
 ```
 
+**How the directory structure works**
+
+/path/to/zipline_data is the root directory you specify when registering your Zipline bundle. Inside this root directory, you need to create subdirectories based on data frequency:
+
+```python
+
+/path/to/zipline_data/
+├── daily/
+│   ├── VNM.csv
+│   ├── VCB.csv
+│   ├── VHM.csv
+│   └── ... (all other stock CSVs)
+├── minute/  (optional, for intraday data)
+│   └── ...
+├── splits.csv  (optional, at root level)
+└── dividends.csv  (optional, at root level)
+
+```
+
+**Key points**
+
+Individual CSV files go in the daily/ subdirectory (or minute/ for intraday)
+Each CSV file is named exactly as the symbol: VCB.csv → symbol VCB in Zipline
+The bundle registration path should point to the root directory (/path/to/zipline_data), not to the daily/ folder
+The csvdir_equities(['daily'], '/path/to/zipline_data') tells Zipline to look inside the daily/ subdirectory
 After registration, ingest with `zipline ingest -b vnstock-bundle` and verify with `zipline bundles`.
+
+**Concrete example**
+
+```python
+
+# In your pipeline.py, save files like this:
+output_dir = Path('./zipline_data/daily')  # Creates the daily subdirectory
+output_dir.mkdir(parents=True, exist_ok=True)
+df.to_csv(output_dir / 'VCB.csv', index=False)
+
+# In ~/.zipline/extension.py, register like this:
+register(
+    'vnstock-bundle',
+    csvdir_equities(
+        ['daily'],           # This tells Zipline to look in daily/ subdirectory
+        './zipline_data',    # This is the ROOT path
+    ),
+    ...
+)
+
+```
 
 **Data quality requirements:** Zipline enforces strict validation: no duplicate timestamps, no missing values in required columns, volume must be positive (zero volume prevents order execution), dates must ascend chronologically, and OHLC relationships must be valid (high ≥ open/close/low). Non-trading days are automatically filtered using the trading calendar, so don't include weekends or holidays in CSVs—Zipline handles this.
 
