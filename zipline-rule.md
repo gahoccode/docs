@@ -199,6 +199,36 @@ zipline_data/        ← Register this path
     ├── VCB.csv
     └── VNM.csv
 
+
+**Example from vnstock3 Transformation**
+
+```python
+
+def prepare_vnstock_for_zipline_from_df(df):
+    """Transform vnstock3 output to Zipline format"""
+    df = df.reset_index()
+    
+    # vnstock3 columns: time, open, high, low, close, volume
+    # Need to add: dividend, split
+    # Need to rename: time → date
+    
+    # Convert datetime to string
+    df['time'] = pd.to_datetime(df['time'])
+    if df['time'].dt.tz is not None:
+        df['time'] = df['time'].dt.tz_localize(None)
+    df['time'] = df['time'].dt.strftime('%Y-%m-%d')
+    
+    # Rename and add columns
+    df = df.rename(columns={'time': 'date'})
+    df['dividend'] = 0.0   # Add dividend column (default 0.0)
+    df['split'] = 1.0      # Add split column (default 1.0)
+    
+    # Select exact columns needed
+    df = df[['date', 'open', 'high', 'low', 'close', 'volume', 'dividend', 'split']]
+    
+    return df
+
+```
 **Data quality requirements:** Zipline enforces strict validation: no duplicate timestamps, no missing values in required columns, volume must be positive (zero volume prevents order execution), dates must ascend chronologically, and OHLC relationships must be valid (high ≥ open/close/low). Non-trading days are automatically filtered using the trading calendar, so don't include weekends or holidays in CSVs—Zipline handles this.
 
 ## Vietnamese market characteristics: Trading rules and data implications
