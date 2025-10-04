@@ -4,7 +4,7 @@
 
 ## Quick start: Core transformation pattern
 
-The fundamental challenge is bridging vnstock3's adjusted OHLCV output (datetime64[ns] with timezone) to Zipline's timezone-naive CSV format with explicit corporate action files. **Vietnamese market data comes pre-adjusted** from vnstock3, meaning splits and dividends are already reflected in historical prices without separate event records. This requires either detecting corporate actions from price gaps or accepting adjusted prices as-is for backtesting.
+The fundamental challenge is bridging vnstock3's adjusted OHLCV output (datetime64[ns] with timezone) to Zipline's timezone-naive CSV format with explicit corporate action files. **Vietnamese market data comes pre-adjusted** from vnstock3, meaning splits and dividends are already reflected in historical prices without separate event records. This requires accepting adjusted prices as-is for backtesting.
 
 A minimal working pipeline downloads Vietnamese stocks (VNM, VCB, VHM), converts timezone-aware timestamps to naive YYYY-MM-DD strings, adds required dividend/split columns (defaulting to 0.0 and 1.0), validates against Vietnamese price limit rules (±7% HOSE), and outputs Zipline-compatible CSVs. Production implementations layer on SQLite caching for incremental updates, batch processing with rate limiting, and Vietnamese trading calendar integration (handling Tet's 7-9 day closure).
 
