@@ -245,6 +245,14 @@ date,open,high,low,close,volume,dividend,split
 
 ```
 
+## Comparison: vnstock3 vs yfinance
+
+| Library            | Column Names                                                                                      | Date Column                |
+|---------------------|---------------------------------------------------------------------------------------------------|----------------------------|
+| **vnstock3**        | `time`, `open`, `high`, `low`, `close`, `volume`                                                  | `time` (lowercase)         |
+| **yfinance**        | `Open`, `High`, `Low`, `Close`, `Adj Close`, `Volume`                                            | Index (not column)        |
+| **Zipline required**| `date`, `open`, `high`, `low`, `close`, `volume`, `dividend`, `split`                            | `date` (lowercase)        |
+
 **Data quality requirements:** Zipline enforces strict validation: no duplicate timestamps, no missing values in required columns, volume must be positive (zero volume prevents order execution), dates must ascend chronologically, and OHLC relationships must be valid (high ≥ open/close/low). Non-trading days are automatically filtered using the trading calendar, so don't include weekends or holidays in CSVs—Zipline handles this.
 
 ## Vietnamese market characteristics: Trading rules and data implications
