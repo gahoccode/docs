@@ -129,6 +129,76 @@ register(
 
 ```
 
+**Critical requirements**
+
+Subdirectory name MUST be daily/ or minute/ - these are hardcoded in Zipline's csvdir bundle implementation
+You specify which subdirectories to use when registering: csvdir_equities(['daily'], ...) or csvdir_equities(['daily', 'minute'], ...)
+You cannot use custom names like stocks/, data/, or daily_data/ - it must be exactly daily/ or minute/
+
+
+##Complete Working Example
+
+### Step 1: Create the folder structure 
+
+```python
+
+mkdir -p ./zipline_data/daily
+
+```
+
+### Step 2: Save CSV files to the daily folder
+
+```python
+
+# pipeline.py
+from pathlib import Path
+
+OUTPUT_DIR = Path('./zipline_data/daily')  # Must be 'daily' subdirectory
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+# Save each stock
+df.to_csv(OUTPUT_DIR / 'VCB.csv', index=False)
+df.to_csv(OUTPUT_DIR / 'VNM.csv', index=False)
+
+```
+
+### Step 3: Register bundle pointing to ROOT directory
+
+```python
+
+# ~/.zipline/extension.py
+import pandas as pd
+from zipline.data.bundles import register
+from zipline.data.bundles.csvdir import csvdir_equities
+
+register(
+    'vnstock-bundle',
+    csvdir_equities(
+        ['daily'],              # Tells Zipline to look in daily/ folder
+        './zipline_data'        # Root path - NOT ./zipline_data/daily
+    ),
+    calendar_name='XHKG',
+    start_session=pd.Timestamp('2020-1-1', tz='utc'),
+    end_session=pd.Timestamp('2024-12-31', tz='utc')
+)
+
+```
+
+### Step 4: Ingest
+
+```bash
+
+zipline ingest -b vnstock-bundle
+
+```
+
+**Correct: CSVs in daily/, register with root path**
+
+zipline_data/        ← Register this path
+└── daily/           ← Zipline looks here automatically
+    ├── VCB.csv
+    └── VNM.csv
+
 **Data quality requirements:** Zipline enforces strict validation: no duplicate timestamps, no missing values in required columns, volume must be positive (zero volume prevents order execution), dates must ascend chronologically, and OHLC relationships must be valid (high ≥ open/close/low). Non-trading days are automatically filtered using the trading calendar, so don't include weekends or holidays in CSVs—Zipline handles this.
 
 ## Vietnamese market characteristics: Trading rules and data implications
