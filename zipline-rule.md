@@ -229,6 +229,22 @@ def prepare_vnstock_for_zipline_from_df(df):
     return df
 
 ```
+
+**Valid Example CSV (VCB.csv)**
+
+```csv
+
+date,open,high,low,close,volume,dividend,split
+2024-01-02,95500,96000,95000,95800,2500000,0.0,1.0
+2024-01-03,95800,96500,95500,96200,2800000,0.0,1.0
+2024-01-04,96200,97000,96000,96800,3100000,0.0,1.0
+2024-01-05,96800,97500,96500,97200,2900000,0.0,1.0
+2024-01-08,97200,98000,97000,97800,3200000,0.0,1.0
+2024-01-09,97800,98500,97500,98200,3500000,500.0,1.0
+2024-01-10,49100,49500,48800,49300,7000000,0.0,2.0
+
+```
+
 **Data quality requirements:** Zipline enforces strict validation: no duplicate timestamps, no missing values in required columns, volume must be positive (zero volume prevents order execution), dates must ascend chronologically, and OHLC relationships must be valid (high ≥ open/close/low). Non-trading days are automatically filtered using the trading calendar, so don't include weekends or holidays in CSVs—Zipline handles this.
 
 ## Vietnamese market characteristics: Trading rules and data implications
