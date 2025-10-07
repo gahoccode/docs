@@ -3,7 +3,7 @@ To fetch financial statements data using the Vnstock API, you can use the follow
 ### 1. Báo cáo kết quả kinh doanh (Income Statement)
 **Method**
 ```python
-finance.income_statement(period='year', lang='vi')
+finance.income_statement(period='year', lang='en')
 ```
 
 **Parameters**
@@ -18,7 +18,7 @@ finance.income_statement(period='year', lang='vi')
 ### 2. Bảng cân đối kế toán (Balance Sheet)
 **Method**
 ```python
-finance.balance_sheet(period='year', lang='vi')
+finance.balance_sheet(period='year', lang='en')
 ```
 
 **Parameters**
@@ -33,7 +33,7 @@ finance.balance_sheet(period='year', lang='vi')
 ### 3. Báo cáo lưu chuyển tiền tệ (Cash Flow Statement)
 **Method**
 ```python
-finance.cash_flow(period='year', lang='vi')
+finance.cash_flow(period='year', lang='en')
 ```
 
 **Parameters**
@@ -48,7 +48,7 @@ finance.cash_flow(period='year', lang='vi')
 ### 4. Chỉ số tài chính (Financial Ratios)
 **Method**
 ```python
-finance.ratio(period='year', lang='vi')
+finance.ratio(period='year', lang='en')
 ```
 
 **Parameters**
