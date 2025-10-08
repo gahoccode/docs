@@ -20,9 +20,43 @@ loader = dt.DataLoader(
     table_style="levels" # Table style: 'levels', 'prefix', or 'stack'
 )
 
+
 # Download the data
 data = loader.download()
 ```
+
+The `vnquant` package provides several table style parameters for fetching and formatting stock data. Here are the table style parameters and their respective methods for fetching:
+
+### Table Style Parameters
+
+1. **Levels**
+   - **Description**: Returns a DataFrame with multi-level columns consisting of the stock symbols and basic stock indices such as `['high', 'low', 'open', 'close', 'adjust', 'volume', 'value']`.
+   - **Method for Fetching**:
+     ```python
+     import vnquant.data as dt
+     loader = dt.DataLoader('VND', '2018-02-02', '2018-04-02')
+     data = loader.download()
+     ```
+
+2. **Prefix**
+   - **Description**: Adds the stock symbol as a prefix to each column name.
+   - **Method for Fetching**:
+     ```python
+     import vnquant.data as dt
+     loader = dt.DataLoader(['VND', 'FPT'], '2018-02-02', '2018-04-02', table_style='prefix')
+     data = loader.download()
+     ```
+
+3. **Stack**
+   - **Description**: Returns the DataFrame with an additional column named `code` to indicate the stock symbol each record belongs to.
+   - **Method for Fetching**:
+    
+     ```python
+     import vnquant.data as dt
+     loader = dt.DataLoader(['VND', 'FPT'], '2018-02-02', '2018-04-02', table_style='stack')
+     data = loader.download()
+     ```
+
 
 Example for loading multiple stocks:
 
