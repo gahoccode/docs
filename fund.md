@@ -1,4 +1,3 @@
-Certainly! Below are the Python methods to fetch various data on funds information using the vnstock API, along with the expected output of `data.info()` for each method.
 
 ### 1. List All Funds
 
