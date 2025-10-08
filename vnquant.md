@@ -78,7 +78,7 @@ Each stock code is prefixed to each index to become a column name:
 ### 3. Stack (`table_style='stack'`):
 A new column named `code` is added to demonstrate the stock symbols:
 
-|  || code | high | low | open | close | adjust | volume_match | value_match |  
+|  | code | high | low | open | close | adjust | volume_match | value_match |  
 |---|---|---|---|---|---|---|---|  
 | **date** |   |   |   |   |   |   |   |  
 | 2018-04-02 | FPT | 61.7 | 61.00 | 61.5 | 61.50 | 21.98 | 2194820.0 | 1.347410e+11 |  
