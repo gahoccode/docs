@@ -74,40 +74,40 @@ The document provides several methods to fetch listing information using the `vn
    ```
 
    **Sample Output:**
-```shell
-   listing.symbols_by_group('VN30')
-0     ACB
-1     BCM
-2     BID
-3     BVH
-4     CTG
-5     FPT
-6     GAS
-7     GVR
-8     HDB
-9     HPG
-10    MBB
-11    MSN
-12    MWG
-13    PLX
-14    POW
-15    SAB
-16    SHB
-17    SSB
-18    SSI
-19    STB
-20    TCB
-21    TPB
-22    VCB
-23    VHM
-24    VIB
-25    VIC
-26    VJC
-27    VNM
-28    VPB
-29    VRE
-Name: symbol, dtype: object
-   ```
+    ```shell
+    listing.symbols_by_group('VN30')
+    0     ACB
+    1     BCM
+    2     BID
+    3     BVH
+    4     CTG
+    5     FPT
+    6     GAS
+    7     GVR
+    8     HDB
+    9     HPG
+    10    MBB
+    11    MSN
+    12    MWG
+    13    PLX
+    14    POW
+    15    SAB
+    16    SHB
+    17    SSB
+    18    SSI
+    19    STB
+    20    TCB
+    21    TPB
+    22    VCB
+    23    VHM
+    24    VIB
+    25    VIC
+    26    VJC
+    27    VNM
+    28    VPB
+    29    VRE
+    Name: symbol, dtype: object
+    ```
 
    **Data Structure:**
    ```shell
@@ -138,27 +138,27 @@ Name: symbol, dtype: object
    ```
 
    **Data Structure:**
-   ```shell
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 1592 entries, 0 to 1591
-Data columns (total 14 columns):
- #   Column         Non-Null Count  Dtype 
----  ------         --------------  ----- 
- 0   symbol         1592 non-null   object
- 1   organ_name     1592 non-null   object
- 2   en_organ_name  1592 non-null   object
- 3   icb_name3      1592 non-null   object
- 4   en_icb_name3   1592 non-null   object
- 5   icb_name2      1592 non-null   object
- 6   en_icb_name2   1592 non-null   object
- 7   icb_name4      1592 non-null   object
- 8   en_icb_name4   1592 non-null   object
- 9   com_type_code  1592 non-null   object
- 10  icb_code1      1592 non-null   object
- 11  icb_code2      1592 non-null   object
- 12  icb_code3      1592 non-null   object
- 13  icb_code4      1592 non-null   object
-dtypes: object(14)
-memory usage: 174.2+ KB
-   ```
+    ```shell
+    <class 'pandas.core.frame.DataFrame'>
+    RangeIndex: 1592 entries, 0 to 1591
+    Data columns (total 14 columns):
+     #   Column         Non-Null Count  Dtype
+    ---  ------         --------------  -----
+     0   symbol         1592 non-null   object
+     1   organ_name     1592 non-null   object
+     2   en_organ_name  1592 non-null   object
+     3   icb_name3      1592 non-null   object
+     4   en_icb_name3   1592 non-null   object
+     5   icb_name2      1592 non-null   object
+     6   en_icb_name2   1592 non-null   object
+     7   icb_name4      1592 non-null   object
+     8   en_icb_name4   1592 non-null   object
+     9   com_type_code  1592 non-null   object
+     10  icb_code1      1592 non-null   object
+     11  icb_code2      1592 non-null   object
+     12  icb_code3      1592 non-null   object
+     13  icb_code4      1592 non-null   object
+    dtypes: object(14)
+    memory usage: 174.2+ KB
+    ```
 
