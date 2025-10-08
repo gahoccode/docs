@@ -74,8 +74,8 @@ The document provides several methods to fetch listing information using the `vn
    ```
 
    **Sample Output:**
-   ```shell
-  listing.symbols_by_group('VN30')
+```shell
+   listing.symbols_by_group('VN30')
 0     ACB
 1     BCM
 2     BID
