@@ -57,6 +57,38 @@ The `vnquant` package provides several table style parameters for fetching and f
      data = loader.download()
      ```
 
+The `vnquant` package provides different formats for output when using the `DataLoader` class to clone stock prices. Below are the sample outputs for each `table_style` parameter:
+
+### 1. Multiple-level (`table_style='levels'`):
+Attributes (Columns include multiple levels for arguments and symbols):
+
+| Attributes | high | low | open | close | avg | volume |  
+|---|---|---|---|---|---|---|  
+| **Symbols** | VND | VND | VND | VND | VND | VND |  
+| **Date** |   |   |   |   |   |   |  
+| 2018-02-02 | 28.95 | 27.60 | 28.5 | 28.95 | 28.28 | 1700670.0 |  
+| 2018-02-05 | 28.45 | 26.95 | 28.1 | 26.95 | 27.68 | 2150120.0 |  
+
+### 2. Prefix (`table_style='prefix'`):
+Each stock code is prefixed to each index to become a column name:
+
+| VND_code | FPT_code | VND_high | FPT_high | VND_low | FPT_low | VND_open | FPT_open | VND_close | FPT_close | VND_adjust | FPT_adjust | VND_volume_match | FPT_volume_match | VND_value_match | FPT_value_match |  
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|  
+| **Date** |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |  
+| 2018-04-02 | VND | FPT | 29.80 | 61.7 | 29.10 | 61.0 | 29.10 | 61.5 | 29.55 | 61.5 | 6.52 | 21.98 | 2141980.0 | 2194820.0 | 6.320100e+10 | 1.347410e+11 |  
+
+### 3. Stack (`table_style='stack'`):
+A new column named `code` is added to demonstrate the stock symbols:
+
+| code | high | low | open | close | adjust | volume_match | value_match |  
+|---|---|---|---|---|---|---|---|  
+| **Date** |   |   |   |   |   |   |   |  
+| 2018-04-02 | FPT | 61.7 | 61.00 | 61.5 | 61.50 | 21.98 | 2194820.0 | 1.347410e+11 |  
+| 2018-04-02 | VND | 29.8 | 29.10 | 29.1 | 29.55 | 6.52 | 2141980.0 | 6.320100e+10 |  
+| 2018-03-30 | FPT | 61.3 | 59.40 | 59.6 | 60.70 | 21.69 | 2434830.0 | 1.474940e+11 |  
+
+These examples illustrate the different ways you can structure and access stock data using the `vnquant` package depending on your analysis needs.
+
 
 Example for loading multiple stocks:
 
