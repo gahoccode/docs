@@ -1,5 +1,3 @@
-Based on the README.md, I'll extract all the Python functions and their example use cases from the vnquant package, which is a tool for financial data analysis of the Vietnam stock market.
-
 ## 1. Data Loading Functions
 
 ### DataLoader
