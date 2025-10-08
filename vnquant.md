@@ -78,12 +78,12 @@ Each stock code is prefixed to each index to become a column name:
 ### 3. Stack (`table_style='stack'`):
 A new column named `code` is added to demonstrate the stock symbols:
 
-|  | code | high | low | open | close | adjust | volume_match | value_match |  
-|---|---|---|---|---|---|---|---|  
-| **date** |   |   |   |   |   |   |   |  
-| 2018-04-02 | FPT | 61.7 | 61.00 | 61.5 | 61.50 | 21.98 | 2194820.0 | 1.347410e+11 |  
-| 2018-04-02 | VND | 29.8 | 29.10 | 29.1 | 29.55 | 6.52 | 2141980.0 | 6.320100e+10 |  
-| 2018-03-30 | FPT | 61.3 | 59.40 | 59.6 | 60.70 | 21.69 | 2434830.0 | 1.474940e+11 |  
+|  | code | high | low | open | close | adjust | volume_match | value_match |
+|---|---|---|---|---|---|---|---|---|
+| **date** |   |   |   |   |   |   |   |   |
+| 2018-04-02 | FPT | 61.7 | 61.00 | 61.5 | 61.50 | 21.98 | 2194820.0 | 1.347410e+11 |
+| 2018-04-02 | VND | 29.8 | 29.10 | 29.1 | 29.55 | 6.52 | 2141980.0 | 6.320100e+10 |
+| 2018-03-30 | FPT | 61.3 | 59.40 | 59.6 | 60.70 | 21.69 | 2434830.0 | 1.474940e+11 |
 
 These examples illustrate the different ways you can structure and access stock data using the `vnquant` package depending on your analysis needs.
 
