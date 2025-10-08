@@ -61,3 +61,13 @@ finance.ratio(period='year', lang='en')
 - Data Frame includes columns of both `float64` and `int64` types.
 
 Each of the above methods provides financial data as a structured pandas DataFrame, allowing for easy visualization and analysis in Python.
+
+# Apply to MultiIndex DataFrame
+```python
+flattened_df = flatten_hierarchical_index(
+    ratios,  # multi-index df
+    separator="_",  # separator for flattened columns
+    handle_duplicates=True,  # handle duplicate column names
+    drop_levels=0,  # or specify levels to drop
+)
+```

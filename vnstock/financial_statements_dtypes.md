@@ -425,7 +425,15 @@ memory usage: 3.8+ KB
 ```
 
 ### Chỉ số tài chính (Financial Ratios)
-
+# Apply to MultiIndex DataFrame
+```python
+flattened_df = flatten_hierarchical_index(
+    ratios,  # multi-index df
+    separator="_",  # separator for flattened columns
+    handle_duplicates=True,  # handle duplicate column names
+    drop_levels=0,  # or specify levels to drop
+)
+```
 **Tiếng Việt**
 ```plaintext
 <class 'pandas.core.frame.DataFrame'>

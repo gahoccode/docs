@@ -863,6 +863,16 @@ ratio.columns.to_list()
  ('Chỉ tiêu định giá', 'BVPS (VND)'),
  ('Chỉ tiêu định giá', 'EV/EBITDA')]
 
+# Apply to MultiIndex DataFrame
+``` 
+flattened_df = flatten_hierarchical_index(
+    ratios,  # multi-index df
+    separator="_",  # separator for flattened columns
+    handle_duplicates=True,  # handle duplicate column names
+    drop_levels=0,  # or specify levels to drop
+)
+```
+
 cash_flow.columns.to_list()
  ['ticker',
  'yearReport',
