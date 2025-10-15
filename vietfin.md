@@ -58,3 +58,8 @@ provider: tcbs
 extra: {'command_run_at': '2024-02-27T01:10:17.464843+00:00', 'symbol': 'VNM', ...
 raw_data: [{'ticker': 'VNM', 'data': [{'open': 67795.0, 'high': 67894.0, 'low': ...
 ```
+**Display result in dataframe**
+```python
+
+vf.equity.price.historical(symbol="vnm").to_df().tail(5)
+```
