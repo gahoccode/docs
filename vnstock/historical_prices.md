@@ -5,6 +5,8 @@ The methods to fetch historical prices in the provided context, along with their
 #### Historical Prices:
 - **Method**:
   ```python
+  from vnstock import Quote
+  quote = Quote(symbol='VCI', source='VCI')
   quote.history(start='2020-01-01', end='2024-05-25')
   ```
 - **Dtypes**:
