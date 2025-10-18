@@ -4,10 +4,10 @@ Here are all the CLI commands along with their descriptions and examples:
 
 - **`claude`**  
   **Description:** Start interactive REPL  
-  **Example:**  
-```bash
-claude
-```
+  **Example:**
+  ```bash
+  claude
+  ```
 
 - **`claude "query"`**  
   **Description:** Start REPL with initial prompt  
