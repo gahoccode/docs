@@ -29,6 +29,14 @@ Historical market prices are usually provided in the form of OHLCV:
 - **`end_date`**: Defaults to the current date if not provided.
 - **`start_date`**: Defaults to 60 days before the `end_date` if not provided.
 - **`interval`**: Defaults to `1d` (one day) if not specified.
+- **provider**: Defaults to TCBS, DNSE is the other option
+
+```python
+price_df = vf.equity.price.historical(symbol="vnm",
+provider="dnse", # or tcbs
+start_date=start_date,
+end_date=end_date).to_df()
+```
 
 #### Sample Usage and Output
 To retrieve historical prices of a stock ticker (e.g., "VNM"), you can follow this sample code:
