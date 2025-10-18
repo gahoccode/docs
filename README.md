@@ -5,9 +5,9 @@ This repository contains documentation files related to financial analysis and s
 ## Documentation Files
 
 ### Vietnamese Stock Market Tools
-- `thinh-vu-vnstock.md` - Documentation for vnstock library by Thinh Vu
-- `vnstock-ezchart.md` - Documentation for vnstock's ezchart visualization module
 - `vnquant.md` - Documentation for VNQuant library
+- `vietfin.md` - Documentation for VietFin library (historical stock price data)
+- `zipline-rule.md` - Vietnamese stock market data pipeline for Zipline Reloaded integration
 
 ### Portfolio Optimization Tools
 - `skfolio.md` - Documentation for Skfolio portfolio optimization library
@@ -17,5 +17,9 @@ This repository contains documentation files related to financial analysis and s
 ### Financial Analysis Tools
 - `finquant.md` - Documentation for FinQuant financial analysis library
 - `mplfinance.md` - Documentation for mplfinance library (financial plotting)
+- `quantstats.md` - Documentation for QuantStats portfolio analytics library
 
-Last Updated: May 14, 2025
+### Development Tools
+- `ModelConfig.md` - Claude Code model configuration instructions
+
+Last Updated: October 18, 2025
