@@ -28,4 +28,19 @@ The Claude Code Model Configuration instructions include three methods for chang
    - `claude-3-7-sonnet-20250219`
    - `claude-3-5-haiku-20241022`
 
-These instructions allow you to switch models based on your session needs or to set a default model for all future sessions.
+5. **Environment Variables**
+
+   - **`ANTHROPIC_DEFAULT_OPUS_MODEL`** - The model to use for `opus`, or for `opusplan` when Plan Mode is active.
+   - **`ANTHROPIC_DEFAULT_SONNET_MODEL`** - The model to use for `sonnet`, or for `opusplan` when Plan Mode is not active.
+   - **`ANTHROPIC_DEFAULT_HAIKU_MODEL`** - The model to use for `haiku`, or background functionality.
+   - **`CLAUDE_CODE_SUBAGENT_MODEL`** - The model to use for subagents.
+
+Note: `ANTHROPIC_SMALL_FAST_MODEL` is deprecated in favor of `ANTHROPIC_DEFAULT_HAIKU_MODEL`.
+
+For prompt caching configuration:
+
+   - **`DISABLE_PROMPT_CACHING`** - Set to `1` to disable prompt caching for all models.
+   - **`DISABLE_PROMPT_CACHING_HAIKU`** - Set to `1` to disable prompt caching for Haiku models only.
+   - **`DISABLE_PROMPT_CACHING_SONNET`** - Set to `1` to disable prompt caching for Sonnet models only.
+   - **`DISABLE_PROMPT_CACHING_OPUS`** - Set to `1` to disable prompt caching for Opus models only.
+
