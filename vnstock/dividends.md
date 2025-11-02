@@ -1,7 +1,7 @@
 # Dividends
 ## Method 1: Using Vnstock class
 
-Dividend data is available from TCBS source.
+**Dividend data is available from TCBS source regardles of what method is used.**
 
 ```python
 from vnstock import Vnstock
