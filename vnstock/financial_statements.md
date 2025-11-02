@@ -48,7 +48,7 @@ finance.cash_flow(period='year', lang='en')
 ### 4. Chỉ số tài chính (Financial Ratios)
 **Method**
 ```python
-finance.ratio(period='year', lang='en')
+ratios = finance.ratio(period='year', lang='en')
 ```
 
 **Parameters**
@@ -63,6 +63,8 @@ finance.ratio(period='year', lang='en')
 Each of the above methods provides financial data as a structured pandas DataFrame, allowing for easy visualization and analysis in Python.
 
 # Apply to MultiIndex DataFrame
+
+Flatten the multiindex ratios dataframe by this method:
 ```python
 flattened_df = flatten_hierarchical_index(
     ratios,  # multi-index df
