@@ -1,5 +1,8 @@
 # Dividends
 ## Method 1: Using Vnstock class
+
+Dividend data is available from TCBS source.
+
 ```python
 from vnstock import Vnstock
 import warnings
@@ -26,12 +29,13 @@ Data columns (total 4 columns):
 dtypes: float64(1), int64(1), object(2)
 ```
 
-## Method 2: Direct Company class instantiation (VCI source only)
-from vnstock import Company
+## Method 2: Direct Company class instantiation (TCBS source only)
 
 ### Create company object with stock symbol
-### VCI source provides access to dividend data
+### TCBS source provides access to dividend data
 ```python
+from vnstock import Company
+
 company = Company(symbol='ACB', source='TCBS')
 ```
 
