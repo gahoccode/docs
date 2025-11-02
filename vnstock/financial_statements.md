@@ -66,6 +66,8 @@ Each of the above methods provides financial data as a structured pandas DataFra
 
 Flatten the multiindex ratios dataframe by this method:
 ```python
+from vnstock.core.utils.transform import flatten_hierarchical_index
+
 flattened_df = flatten_hierarchical_index(
     ratios,  # multi-index df
     separator="_",  # separator for flattened columns
