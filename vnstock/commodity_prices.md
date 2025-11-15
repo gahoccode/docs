@@ -5,7 +5,7 @@ The provided context outlines methods to fetch commodity prices and exchange rat
    - **Vàng SJC (SJC Gold)**
      - **Method:**
        ```python
-       from vnstock.explorer.misc.gold_price import *
+       from vnstock.explorer.misc.gold_price import sjc_gold_price
        sjc_gold_price()
        ```
      - **Parameters:** No parameters required.
@@ -37,7 +37,7 @@ memory usage: 288.0+ bytes
    - **Vàng Bảo Tín Minh Châu (BTMC Gold)**
      - **Method:**
        ```python
-       from vnstock.explorer.misc.gold_price import * 
+       from vnstock.explorer.misc.gold_price import btmc_goldprice 
        btmc_goldprice()
        ```
      - **Parameters:** No parameters required.
