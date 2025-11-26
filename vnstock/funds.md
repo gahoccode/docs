@@ -1,5 +1,10 @@
 Certainly! Below are the methods provided by Vnstock to retrieve information on funds, including sample outputs and clearly defined data types for each column.
 
+
+```python
+from vnstock import Fund fund = Fund()
+```
+
 ### 1. Liệt kê quỹ (List Funds)
 **Method:**
 ```python
