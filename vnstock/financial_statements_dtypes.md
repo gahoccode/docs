@@ -456,8 +456,8 @@ Data columns (total 37 columns):
 
 0 (Meta, CP) 13 non-null object
 1 (Meta, Năm) 13 non-null int64
- 2 (Meta, Kỳ) 13 non-null int64
- 3 (Chỉ tiêu cơ cấu nguồn vốn, (Vay NH+DH)/VCSH) 13 non-null float64
+2 (Meta, Kỳ) 13 non-null int64
+3 (Chỉ tiêu cơ cấu nguồn vốn, (Vay NH+DH)/VCSH) 13 non-null float64
 4 (Chỉ tiêu cơ cấu nguồn vốn, Nợ/VCSH) 13 non-null float64
 5 (Chỉ tiêu cơ cấu nguồn vốn, TSCĐ / Vốn CSH) 13 non-null float64
 6 (Chỉ tiêu cơ cấu nguồn vốn, Vốn CSH/Vốn điều lệ) 13 non-null float64
@@ -475,7 +475,7 @@ Data columns (total 37 columns):
 18 (Chỉ tiêu khả năng sinh lợi, ROIC (%)) 13 non-null float64
 19 (Chỉ tiêu khả năng sinh lợi, ROA (%)) 13 non-null float64
 20 (Chỉ tiêu khả năng sinh lợi, EBITDA (Tỷ đồng)) 13 non-null int64
- 21 (Chỉ tiêu khả năng sinh lợi, EBIT (Tỷ đồng)) 13 non-null float64
+21 (Chỉ tiêu khả năng sinh lợi, EBIT (Tỷ đồng)) 13 non-null float64
 22 (Chỉ tiêu khả năng sinh lợi, Tỷ suất cổ tức (%)) 13 non-null float64
 23 (Chỉ tiêu thanh khoản, Chỉ số thanh toán hiện thời) 13 non-null float64
 24 (Chỉ tiêu thanh khoản, Chỉ số thanh toán tiền mặt) 13 non-null float64
@@ -484,8 +484,8 @@ Data columns (total 37 columns):
 27 (Chỉ tiêu thanh khoản, Đòn bẩy tài chính) 13 non-null float64
 28 (Chỉ tiêu định giá, P/B) 13 non-null float64
 29 (Chỉ tiêu định giá, Vốn hóa (Tỷ đồng)) 13 non-null int64
- 30 (Chỉ tiêu định giá, Số CP lưu hành (Triệu CP)) 13 non-null int64
- 31 (Chỉ tiêu định giá, P/E) 13 non-null float64
+30 (Chỉ tiêu định giá, Số CP lưu hành (Triệu CP)) 13 non-null int64
+31 (Chỉ tiêu định giá, P/E) 13 non-null float64
 32 (Chỉ tiêu định giá, P/S) 13 non-null float64
 33 (Chỉ tiêu định giá, P/Cash Flow) 13 non-null float64
 34 (Chỉ tiêu định giá, EPS (VND)) 13 non-null float64
