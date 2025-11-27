@@ -536,6 +536,8 @@ None
 36  EV/EBITDA                                                   13 non-null     float64
 ```
 
+**_English_**
+
 ```python
 0   ticker                                                    13 non-null     object
 1   yearReport                                                13 non-null     int64
@@ -574,8 +576,4 @@ None
 34  EPS (VND)                                                 13 non-null     float64
 35  BVPS (VND)                                                13 non-null     float64
 36  EV/EBITDA                                                 13 non-null     float64
-```
-
-```
-
 ```
